@@ -1,0 +1,7507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="WebStudio builds professional websites for local businesses."
+  >
+
+  <title>WebStudio — Professional Websites for Businesses</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- UI/UX Design System & Micro-Interactions -->
+  <link rel="stylesheet" href="/css/ui-ux.css">
+
+  <style>
+
+    /* =========================================================
+       ROOT
+    ========================================================= */
+
+    :root {
+
+      --bg:
+        #041410;
+
+      --bg-2:
+        #07201a;
+
+      --bg-3:
+        #0c2e26;
+
+      --surface:
+        #0a261f;
+
+      --surface-2:
+        #0e332a;
+
+      --surface-light:
+        #ecfdf5;
+
+      --white:
+        #ffffff;
+
+      --text:
+        #ecfdf5;
+
+      --text-soft:
+        #a7f3d0;
+
+      --text-muted:
+        #6ee7b7;
+
+      --dark:
+        #041410;
+
+      --blue:
+        #34d399;
+
+      --blue-light:
+        #6ee7b7;
+
+      --blue-dark:
+        #059669;
+
+      --green:
+        #10b981;
+
+      --border:
+        rgba(52,211,153,.15);
+
+      --border-light:
+        rgba(52,211,153,.22);
+
+      --shadow:
+        0 25px 60px rgba(0,0,0,.55);
+
+      --radius:
+        16px;
+
+      --max:
+        1180px;
+
+    }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      font-family:
+        "IBM Plex Sans",
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(52,211,153,.16),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(16,185,129,.12),
+          transparent 32%
+        ),
+        linear-gradient(
+          135deg,
+          #041410 0%,
+          #07201a 50%,
+          #0b2b23 100%
+        ) !important;
+
+      color:
+        var(--text);
+
+      line-height:
+        1.6;
+
+      min-height:
+        100vh;
+
+      overflow-x:
+        hidden;
+
+    }
+
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+
+    a {
+      color: inherit;
+    }
+
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+
+    button {
+      cursor: pointer;
+    }
+
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+
+    /* =========================================================
+       CONTAINER
+    ========================================================= */
+
+    .section-container {
+
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max)
+        );
+
+      margin:
+        0 auto;
+
+    }
+
+
+    .section {
+      padding: 100px 0;
+    }
+
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .navbar {
+
+      position:
+        sticky;
+
+      top:
+        0;
+
+      z-index:
+        1000;
+
+      background:
+        rgba(7,17,31,.88);
+
+      backdrop-filter:
+        blur(18px);
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .nav-container {
+
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max)
+        );
+
+      height:
+        76px;
+
+      margin:
+        0 auto;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        30px;
+
+    }
+
+
+    .logo {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      text-decoration:
+        none;
+
+      font-weight:
+        700;
+
+      font-size:
+        19px;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    .logo-mark {
+
+      width:
+        36px;
+
+      height:
+        36px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue),
+          #1d4ed8
+        );
+
+      color:
+        white;
+
+      font-weight:
+        800;
+
+      box-shadow:
+        0 8px 25px rgba(37,99,235,.3);
+
+    }
+
+
+    .nav-links {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        28px;
+
+    }
+
+
+    .nav-links a {
+
+      text-decoration:
+        none;
+
+      color:
+        var(--text-soft);
+
+      font-size:
+        14px;
+
+      font-weight:
+        600;
+
+      transition:
+        .2s ease;
+
+    }
+
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+
+    .nav-actions {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+    }
+
+
+    .mobile-menu-btn {
+
+      display:
+        none;
+
+      width:
+        42px;
+
+      height:
+        42px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        var(--surface);
+
+      color:
+        white;
+
+      border-radius:
+        10px;
+
+      font-size:
+        20px;
+
+    }
+
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .btn {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      min-height:
+        46px;
+
+      padding:
+        0 20px;
+
+      border:
+        none;
+
+      border-radius:
+        9px;
+
+      text-decoration:
+        none;
+
+      font-weight:
+        700;
+
+      font-size:
+        14px;
+
+      transition:
+        .25s ease;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    .btn-primary {
+
+      color:
+        white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #3b82f6,
+          #2563eb
+        );
+
+      box-shadow:
+        0 10px 28px rgba(37,99,235,.25);
+
+    }
+
+
+    .btn-primary:hover {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 15px 35px rgba(37,99,235,.35);
+
+    }
+
+
+    .btn-outline {
+
+      color:
+        var(--text-soft);
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,.035);
+
+    }
+
+
+    .btn-outline:hover {
+
+      color:
+        white;
+
+      border-color:
+        rgba(96,165,250,.5);
+
+      background:
+        rgba(59,130,246,.08);
+
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+
+      position:
+        relative;
+
+      padding:
+        115px 0 100px;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .hero::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        500px;
+
+      height:
+        500px;
+
+      right:
+        -180px;
+
+      top:
+        -180px;
+
+      border-radius:
+        50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(59,130,246,.20),
+          transparent 68%
+        );
+
+      pointer-events:
+        none;
+
+    }
+
+
+    .hero-container {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max)
+        );
+
+      margin:
+        0 auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1.08fr .92fr;
+
+      gap:
+        75px;
+
+      align-items:
+        center;
+
+    }
+
+
+    .hero-label {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      padding:
+        7px 12px;
+
+      border:
+        1px solid rgba(96,165,250,.22);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(59,130,246,.08);
+
+      color:
+        #93c5fd;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1.4px;
+
+      margin-bottom:
+        22px;
+
+    }
+
+
+    .hero-label::before {
+
+      content:
+        "";
+
+      width:
+        7px;
+
+      height:
+        7px;
+
+      border-radius:
+        50%;
+
+      background:
+        #60a5fa;
+
+    }
+
+
+    .hero h1 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(46px, 6vw, 78px);
+
+      line-height:
+        1.02;
+
+      letter-spacing:
+        -3px;
+
+      max-width:
+        760px;
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .hero h1 span {
+      color:
+        #60a5fa;
+    }
+
+
+    .hero-description {
+
+      max-width:
+        650px;
+
+      color:
+        var(--text-soft);
+
+      font-size:
+        18px;
+
+      line-height:
+        1.8;
+
+      margin-bottom:
+        32px;
+
+    }
+
+
+    .hero-actions {
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        12px;
+
+    }
+
+
+    .hero-note {
+
+      margin-top:
+        25px;
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        13px;
+
+    }
+
+
+    /* =========================================================
+       HERO BROWSER
+    ========================================================= */
+
+    .browser {
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid rgba(148,163,184,.18);
+
+      border-radius:
+        18px;
+
+      background:
+        #0e1b2d;
+
+      box-shadow:
+        var(--shadow);
+
+    }
+
+
+    .browser-top {
+
+      height:
+        46px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      padding:
+        0 15px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        #111f32;
+
+    }
+
+
+    .browser-dot {
+
+      width:
+        8px;
+
+      height:
+        8px;
+
+      border-radius:
+        50%;
+
+      background:
+        #607089;
+
+    }
+
+
+    .browser-address {
+
+      flex:
+        1;
+
+      margin-left:
+        8px;
+
+      padding:
+        7px 12px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        7px;
+
+      color:
+        #71839b;
+
+      font-size:
+        10px;
+
+      background:
+        rgba(255,255,255,.025);
+
+    }
+
+
+    .mock-page {
+
+      min-height:
+        410px;
+
+      padding:
+        28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #152944,
+          #0d1a2b
+        );
+
+    }
+
+
+    .mock-nav {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        55px;
+
+    }
+
+
+    .mock-logo-line {
+
+      width:
+        75px;
+
+      height:
+        9px;
+
+      border-radius:
+        10px;
+
+      background:
+        #60a5fa;
+
+    }
+
+
+    .mock-nav-lines {
+
+      display:
+        flex;
+
+      gap:
+        7px;
+
+    }
+
+
+    .mock-nav-lines span {
+
+      width:
+        30px;
+
+      height:
+        5px;
+
+      border-radius:
+        5px;
+
+      background:
+        #52657d;
+
+    }
+
+
+    .mock-content {
+
+      max-width:
+        360px;
+
+    }
+
+
+    .mock-small {
+
+      width:
+        85px;
+
+      height:
+        7px;
+
+      border-radius:
+        5px;
+
+      background:
+        #3b82f6;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .mock-content h3 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        32px;
+
+      line-height:
+        1.1;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .mock-content p {
+
+      color:
+        #9cafc5;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.7;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .mock-button {
+
+      display:
+        inline-block;
+
+      padding:
+        9px 15px;
+
+      border-radius:
+        6px;
+
+      background:
+        #2563eb;
+
+      color:
+        white;
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    /* =========================================================
+       TRUST
+    ========================================================= */
+
+    .trust {
+
+      padding:
+        28px 0;
+
+      border-top:
+        1px solid var(--border);
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,.025);
+
+    }
+
+
+    .trust-grid {
+
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max)
+        );
+
+      margin:
+        0 auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+    }
+
+
+    .trust-item {
+
+      text-align:
+        center;
+
+      padding:
+        8px 15px;
+
+      border-right:
+        1px solid var(--border);
+
+    }
+
+
+    .trust-item:last-child {
+      border-right:
+        none;
+    }
+
+
+    .trust-number {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        27px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .trust-label {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        12px;
+
+      margin-top:
+        3px;
+
+    }
+
+
+    /* =========================================================
+       SECTION HEADINGS
+    ========================================================= */
+
+    .section-heading {
+      max-width:
+        700px;
+
+      margin:
+        0 auto 55px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .section-label {
+
+      display:
+        inline-block;
+
+      margin-bottom:
+        14px;
+
+      color:
+        #60a5fa;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .section-heading h2,
+    .request-info h2,
+    .preview-text h2 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(36px, 5vw, 55px);
+
+      line-height:
+        1.08;
+
+      letter-spacing:
+        -1.8px;
+
+      margin-bottom:
+        18px;
+
+    }
+
+
+    .section-heading p,
+    .request-info > p,
+    .preview-text > p {
+
+      color:
+        var(--text-soft);
+
+      font-size:
+        16px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
+
+    .services-section {
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.015),
+          rgba(255,255,255,.035)
+        );
+
+      border-top:
+        1px solid var(--border);
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .services-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        18px;
+
+    }
+
+
+    .service-card {
+
+      padding:
+        30px;
+
+      min-height:
+        220px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(23,42,67,.92),
+          rgba(12,28,47,.92)
+        );
+
+      transition:
+        .25s ease;
+
+    }
+
+
+    .service-card:hover {
+
+      transform:
+        translateY(-5px);
+
+      border-color:
+        rgba(96,165,250,.35);
+
+      box-shadow:
+        0 20px 45px rgba(0,0,0,.22);
+
+    }
+
+
+    .service-icon {
+
+      width:
+        45px;
+
+      height:
+        45px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        11px;
+
+      background:
+        rgba(59,130,246,.12);
+
+      border:
+        1px solid rgba(96,165,250,.18);
+
+      color:
+        #93c5fd;
+
+      font-size:
+        19px;
+
+      margin-bottom:
+        22px;
+
+    }
+
+
+    .service-card h3 {
+
+      font-size:
+        19px;
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .service-card p {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    /* =========================================================
+       HOW IT WORKS
+    ========================================================= */
+
+    .process-section {
+
+      background:
+        #081423;
+
+    }
+
+
+    .process-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:
+        15px;
+
+    }
+
+
+    .process-card {
+
+      padding:
+        28px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        15px;
+
+      background:
+        rgba(255,255,255,.025);
+
+    }
+
+
+    .process-number {
+
+      color:
+        #60a5fa;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+
+      margin-bottom:
+        22px;
+
+    }
+
+
+    .process-card h3 {
+
+      font-size:
+        18px;
+
+      margin-bottom:
+        9px;
+
+    }
+
+
+    .process-card p {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    /* =========================================================
+       PORTFOLIO
+    ========================================================= */
+
+    .portfolio-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        20px;
+
+    }
+
+
+    .portfolio-card {
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        16px;
+
+      background:
+        var(--surface);
+
+      transition:
+        .25s ease;
+
+    }
+
+
+    .portfolio-card:hover {
+
+      transform:
+        translateY(-4px);
+
+      border-color:
+        rgba(96,165,250,.32);
+
+    }
+
+
+    .portfolio-image {
+
+      padding:
+        16px;
+
+      background:
+        #0a1626;
+
+    }
+
+
+    .mock-site {
+
+      overflow:
+        hidden;
+
+      min-height:
+        250px;
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      border-radius:
+        10px;
+
+      background:
+        #12243a;
+
+    }
+
+
+    .mock-header {
+
+      height:
+        40px;
+
+      padding:
+        0 14px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    }
+
+
+    .mock-logo {
+
+      width:
+        55px;
+
+      height:
+        7px;
+
+      border-radius:
+        5px;
+
+      background:
+        #60a5fa;
+
+    }
+
+
+    .mock-links {
+
+      display:
+        flex;
+
+      gap:
+        5px;
+
+    }
+
+
+    .mock-links span {
+
+      width:
+        20px;
+
+      height:
+        4px;
+
+      border-radius:
+        4px;
+
+      background:
+        #5a6c82;
+
+    }
+
+
+    .mock-hero {
+
+      padding:
+        35px 25px;
+
+    }
+
+
+    .mock-hero-label {
+
+      width:
+        60px;
+
+      height:
+        5px;
+
+      background:
+        #3b82f6;
+
+      border-radius:
+        4px;
+
+      margin-bottom:
+        13px;
+
+    }
+
+
+    .mock-hero h4 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        24px;
+
+      line-height:
+        1.15;
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .mock-hero p {
+
+      color:
+        #8da1b8;
+
+      font-size:
+        10px;
+
+      line-height:
+        1.7;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .mock-hero button {
+
+      border:
+        none;
+
+      padding:
+        7px 11px;
+
+      border-radius:
+        5px;
+
+      background:
+        #2563eb;
+
+      color:
+        white;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .portfolio-info {
+
+      padding:
+        22px;
+
+    }
+
+
+    .portfolio-info h3 {
+
+      font-size:
+        18px;
+
+      margin-bottom:
+        4px;
+
+    }
+
+
+    .portfolio-info p {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        12px;
+
+    }
+
+
+    /* =========================================================
+       REQUEST SECTION
+    ========================================================= */
+
+    .request-section {
+
+      background:
+        linear-gradient(
+          145deg,
+          #0b1b2e,
+          #10243c
+        );
+
+      border-top:
+        1px solid var(--border);
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .request-layout {
+
+      display: grid;
+
+      grid-template-columns: .82fr 1.18fr;
+
+      gap: 78px;
+
+      align-items: start;
+
+      max-width: 1180px;
+
+      margin: 0 auto;
+
+    }
+
+
+    .request-info {
+
+      padding-top: 25px;
+
+    }
+
+    .request-info h2 {
+
+      margin-bottom: 20px;
+
+      color: #f8fafc;
+
+      letter-spacing: -0.8px;
+
+    }
+
+    .request-points {
+
+      display: grid;
+
+      gap: 14px;
+
+      margin-top: 28px;
+
+    }
+
+    .request-point {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      color: var(--text-soft);
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      padding: 10px 12px;
+
+      border-radius: 10px;
+
+      background: rgba(15, 23, 42, 0.28);
+
+      border: 1px solid rgba(148, 163, 184, 0.08);
+
+      transition: background .2s ease, transform .2s ease, border-color .2s ease;
+
+    }
+
+    .request-point:hover {
+
+      background: rgba(30, 41, 59, 0.45);
+
+      border-color: rgba(96, 165, 250, 0.16);
+
+      transform: translateX(3px);
+
+    }
+
+
+    .check {
+
+      width:
+        24px;
+
+      height:
+        24px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(34,197,94,.12);
+
+      color:
+        #4ade80;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      flex-shrink:
+        0;
+
+    }
+
+
+    .form-card {
+  padding:34px;
+  border:1px solid rgba(52,211,153,.15);
+  border-radius:18px;
+  background:rgba(10,30,24,.85);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 20px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.1);
+  color:#ecfdf5;
+}
+
+
+    .form-card h3 {
+
+      font-size:
+        24px;
+
+      margin-bottom:
+        5px;
+
+    }
+
+
+    .form-card > p {
+
+      color:
+        var(--text-muted);
+
+      font-size:
+        13px;
+
+      margin-bottom:
+        26px;
+
+    }
+
+
+    .form-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap:
+        17px;
+
+    }
+
+
+    .form-group {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        7px;
+
+    }
+
+
+    .form-group.full {
+
+      grid-column:
+        1 / -1;
+
+    }
+
+
+    .form-group label {
+      display:block;
+      margin-bottom:8px;
+      color:#dbe4ef;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width:100%;
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:10px;
+      background:linear-gradient(145deg,rgba(15,28,46,.92),rgba(7,15,27,.92));
+      color:#f8fafc;
+      outline:none;
+      box-sizing:border-box;
+      transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+    }
+
+    .form-group input,
+    .form-group select { height:48px; padding:0 14px; }
+    .form-group textarea { min-height:125px; padding:13px 14px; resize:vertical; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color:#718096; }
+    .form-group select { color:#dbeafe; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color:rgba(96,165,250,.70);
+      background:linear-gradient(145deg,rgba(18,34,56,.96),rgba(8,17,30,.96));
+      box-shadow:0 0 0 3px rgba(59,130,246,.10),0 8px 25px rgba(0,0,0,.16);
+    }
+
+    .form-submit {
+
+      width: 100%;
+
+      margin-top: 20px;
+
+      position: relative;
+
+      z-index: 2;
+
+    }
+
+
+    .form-message {
+
+      display: none;
+
+      margin-top: 16px;
+
+      padding: 14px 16px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      line-height: 1.55;
+
+      backdrop-filter: blur(12px);
+
+      -webkit-backdrop-filter: blur(12px);
+
+    }
+
+
+    .form-message.success {
+
+      display:
+        block;
+
+      background:
+        rgba(34,197,94,.09);
+
+      border:
+        1px solid rgba(34,197,94,.2);
+
+      color:
+        #86efac;
+
+    }
+
+
+    .form-message.error {
+
+      display:
+        block;
+
+      background:
+        rgba(239,68,68,.09);
+
+      border:
+        1px solid rgba(239,68,68,.2);
+
+      color:
+        #fca5a5;
+
+    }
+
+
+    .request-id-link {
+
+      color:
+        #93c5fd;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+
+      text-decoration:
+        underline;
+
+    }
+
+
+    /* =========================================================
+       TRACKING
+    ========================================================= */
+
+    .tracking {
+
+      background:
+        #f7f9fc;
+
+      color:
+        #111827;
+
+    }
+
+
+    .tracking .section-heading h2 {
+      color:
+        #111827;
+    }
+
+
+    .tracking .section-heading p {
+      color:
+        #64748b;
+    }
+
+
+    .tracking .section-label {
+      color:
+        #2563eb;
+    }
+
+
+    .tracking-search {
+
+      max-width:
+        700px;
+
+      margin:
+        0 auto 15px;
+
+      display:
+        flex;
+
+      gap:
+        10px;
+
+    }
+
+
+    .tracking-search input {
+
+      flex:
+        1;
+
+      min-width:
+        0;
+
+      height:
+        50px;
+
+      padding:
+        0 16px;
+
+      border:
+        1px solid #d7dee8;
+
+      border-radius:
+        9px;
+
+      outline:
+        none;
+
+      color:
+        #111827;
+
+      background:
+        white;
+
+    }
+
+
+    .tracking-search input:focus {
+
+      border-color:
+        #3b82f6;
+
+      box-shadow:
+        0 0 0 3px rgba(59,130,246,.1);
+
+    }
+
+
+    .tracking-error {
+
+      display:
+        none;
+
+      max-width:
+        700px;
+
+      margin:
+        0 auto 20px;
+
+      padding:
+        11px 14px;
+
+      border-radius:
+        8px;
+
+      background:
+        #fef2f2;
+
+      border:
+        1px solid #fecaca;
+
+      color:
+        #b91c1c;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .tracking-card {
+
+      max-width:
+        900px;
+
+      margin:
+        30px auto 0;
+
+      padding:
+        32px;
+
+      border:
+        1px solid #e0e7ef;
+
+      border-radius:
+        16px;
+
+      background:
+        white;
+
+      box-shadow:
+        0 18px 50px rgba(15,23,42,.08);
+
+    }
+
+
+    .tracking-empty {
+
+      margin-top:
+        25px;
+
+      text-align:
+        center;
+
+      color:
+        #64748b;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .tracking-header {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      align-items:
+        flex-start;
+
+      padding-bottom:
+        22px;
+
+      border-bottom:
+        1px solid #e5eaf0;
+
+    }
+
+
+    .request-id {
+
+      color:
+        #2563eb;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.2px;
+
+      margin-bottom:
+        6px;
+
+    }
+
+
+    .tracking-header h3 {
+
+      color:
+        #111827;
+
+      font-size:
+        24px;
+
+      margin-bottom:
+        5px;
+
+    }
+
+
+    .tracking-meta {
+
+      color:
+        #64748b;
+
+      font-size:
+        12px;
+
+    }
+
+
+    .status-badge {
+
+      padding:
+        7px 12px;
+
+      border-radius:
+        999px;
+
+      background:
+        #eff6ff;
+
+      color:
+        #2563eb;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    .status-badge.contacted {
+      background:
+        #fff7ed;
+
+      color:
+        #c2410c;
+    }
+
+
+    .status-badge.in-progress {
+      background:
+        #f5f3ff;
+
+      color:
+        #6d28d9;
+    }
+
+
+    .status-badge.delivered {
+      background:
+        #f0fdf4;
+
+      color:
+        #15803d;
+    }
+
+
+    .timeline {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:
+        10px;
+
+      padding:
+        30px 0 15px;
+
+    }
+
+
+    .timeline-item {
+
+      position:
+        relative;
+
+      text-align:
+        center;
+
+    }
+
+
+    .timeline-circle {
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      margin:
+        0 auto 10px;
+
+      border:
+        1px solid #d6dee8;
+
+      border-radius:
+        50%;
+
+      background:
+        white;
+
+      color:
+        #94a3b8;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .timeline-item h4 {
+
+      color:
+        #334155;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        3px;
+
+    }
+
+
+    .timeline-item p {
+
+      color:
+        #94a3b8;
+
+      font-size:
+        10px;
+
+    }
+
+
+    .timeline-item.done .timeline-circle {
+
+      background:
+        #2563eb;
+
+      border-color:
+        #2563eb;
+
+      color:
+        white;
+
+    }
+
+
+    .timeline-item.active .timeline-circle {
+
+      background:
+        #eff6ff;
+
+      border:
+        2px solid #2563eb;
+
+      color:
+        #2563eb;
+
+    }
+
+
+    .timeline-item.active h4 {
+      color:
+        #2563eb;
+    }
+
+
+    .tracking-note {
+
+      padding:
+        14px 16px;
+
+      border-radius:
+        9px;
+
+      background:
+        #f8fafc;
+
+      color:
+        #475569;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .tracking-note strong {
+      color:
+        #1e293b;
+    }
+
+
+    /* =========================================================
+       PREVIEW
+    ========================================================= */
+
+    .preview-section {
+
+      background:
+        linear-gradient(
+          135deg,
+          #0b1829,
+          #0f2238
+        );
+
+    }
+
+
+    .preview-container {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        .8fr 1.2fr;
+
+      gap:
+        65px;
+
+      align-items:
+        center;
+
+    }
+
+
+    .preview-features {
+
+      display:
+        grid;
+
+      gap:
+        12px;
+
+      margin-top:
+        27px;
+
+    }
+
+
+    .preview-feature {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      color:
+        var(--text-soft);
+
+      font-size:
+        14px;
+
+    }
+
+
+    .large-browser {
+
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.32);
+
+    }
+
+
+    .site-preview {
+
+      min-height:
+        380px;
+
+      padding:
+        25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #102641,
+          #0b192b
+        );
+
+    }
+
+
+    .preview-nav {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      padding-bottom:
+        22px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    }
+
+
+    .preview-logo {
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+
+    }
+
+
+    .preview-menu {
+
+      display:
+        flex;
+
+      gap:
+        13px;
+
+      color:
+        #8194aa;
+
+      font-size:
+        8px;
+
+    }
+
+
+    .preview-content {
+
+      padding:
+        55px 0 30px;
+
+      max-width:
+        470px;
+
+    }
+
+
+    .preview-content small {
+
+      color:
+        #60a5fa;
+
+      font-size:
+        8px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.5px;
+
+    }
+
+
+    .preview-content h3 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        32px;
+
+      line-height:
+        1.1;
+
+      margin:
+        10px 0 12px;
+
+    }
+
+
+    .preview-content p {
+
+      color:
+        #8fa2b9;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.7;
+
+      max-width:
+        390px;
+
+    }
+
+
+    .preview-button {
+
+      display:
+        inline-block;
+
+      margin-top:
+        17px;
+
+      padding:
+        7px 11px;
+
+      background:
+        #2563eb;
+
+      color:
+        white;
+
+      border-radius:
+        5px;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .preview-card {
+
+      margin-top:
+        5px;
+
+      padding:
+        16px;
+
+      border:
+        1px solid rgba(255,255,255,.08);
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(255,255,255,.035);
+
+    }
+
+
+    .preview-card-title {
+
+      color:
+        #a9b9cb;
+
+      font-size:
+        9px;
+
+      margin-bottom:
+        12px;
+
+    }
+
+
+    .preview-lines {
+
+      display:
+        grid;
+
+      gap:
+        7px;
+
+    }
+
+
+    .preview-line {
+
+      height:
+        5px;
+
+      width:
+        80%;
+
+      border-radius:
+        5px;
+
+      background:
+        #334a64;
+
+    }
+
+
+    .preview-line.short {
+      width:
+        50%;
+    }
+
+
+    /* =========================================================
+       CTA
+    ========================================================= */
+
+    .cta {
+
+      padding:
+        85px 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #1d4ed8,
+          #2563eb 45%,
+          #172554
+        );
+
+      text-align:
+        center;
+
+    }
+
+
+    .cta-container {
+
+      max-width:
+        750px;
+
+      margin:
+        0 auto;
+
+    }
+
+
+    .cta h2 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(36px,5vw,55px);
+
+      line-height:
+        1.08;
+
+      margin-bottom:
+        16px;
+
+    }
+
+
+    .cta p {
+
+      color:
+        #dbeafe;
+
+      margin-bottom:
+        28px;
+
+    }
+
+
+    .cta .btn {
+
+      background:
+        white;
+
+      color:
+        #172554;
+
+    }
+
+
+    .cta .btn:hover {
+
+      transform:
+        translateY(-2px);
+
+      background:
+        #eff6ff;
+
+    }
+
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact-section {
+
+      padding:
+        95px 20px;
+
+      background:
+        #07111f;
+
+      border-top:
+        1px solid var(--border);
+
+    }
+
+
+    .contact-container {
+
+      max-width:
+        var(--max);
+
+      margin:
+        0 auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1.1fr .9fr;
+
+      gap:
+        80px;
+
+      align-items:
+        center;
+
+    }
+
+
+    .contact-label {
+
+      display:
+        inline-block;
+
+      margin-bottom:
+        18px;
+
+      color:
+        #60a5fa;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .contact-intro h2 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(38px,5vw,62px);
+
+      line-height:
+        1.02;
+
+      letter-spacing:
+        -2px;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .contact-intro p {
+
+      max-width:
+        570px;
+
+      color:
+        var(--text-soft);
+
+      font-size:
+        16px;
+
+      line-height:
+        1.75;
+
+      margin-bottom:
+        30px;
+
+    }
+
+
+    .contact-request-btn {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        14px 22px;
+
+      border-radius:
+        8px;
+
+      background:
+        white;
+
+      color:
+        #111827;
+
+      text-decoration:
+        none;
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      transition:
+        .25s ease;
+
+    }
+
+
+    .contact-request-btn:hover {
+
+      background:
+        #dbeafe;
+
+      transform:
+        translateY(-2px);
+
+    }
+
+
+    .contact-card {
+
+      padding:
+        32px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #122238,
+          #0d1b2d
+        );
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        16px;
+
+      box-shadow:
+        var(--shadow);
+
+    }
+
+
+    .contact-owner {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        15px;
+
+      padding-bottom:
+        24px;
+
+      margin-bottom:
+        7px;
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .owner-avatar {
+
+      width:
+        52px;
+
+      height:
+        52px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        50%;
+
+      background:
+        #2563eb;
+
+      color:
+        white;
+
+      font-size:
+        18px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .contact-owner small {
+
+      display:
+        block;
+
+      margin-bottom:
+        3px;
+
+      color:
+        #71839b;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1.5px;
+
+    }
+
+
+    .contact-owner h3 {
+
+      font-size:
+        19px;
+
+    }
+
+
+    .contact-item {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        14px;
+
+      padding:
+        16px 0;
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .contact-item:last-child {
+      border-bottom:
+        none;
+    }
+
+
+    .contact-icon {
+
+      width:
+        40px;
+
+      height:
+        40px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      flex-shrink:
+        0;
+
+      border-radius:
+        9px;
+
+      background:
+        rgba(59,130,246,.08);
+
+      border:
+        1px solid rgba(96,165,250,.15);
+
+      color:
+        #60a5fa;
+
+    }
+
+
+    .contact-item small {
+
+      display:
+        block;
+
+      color:
+        #71839b;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        3px;
+
+    }
+
+
+    .contact-item a,
+    .contact-item strong {
+
+      color:
+        #dbeafe;
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+      text-decoration:
+        none;
+
+    }
+
+
+    .contact-item a:hover {
+      color:
+        #60a5fa;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+
+      padding:
+        55px 20px 25px;
+
+      background:
+        #040b14;
+
+      border-top:
+        1px solid var(--border);
+
+    }
+
+
+    .footer-container {
+
+      max-width:
+        var(--max);
+
+      margin:
+        0 auto;
+
+    }
+
+
+    .footer-top {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        60px;
+
+      padding-bottom:
+        45px;
+
+    }
+
+
+    .footer-brand {
+
+      max-width:
+        390px;
+
+    }
+
+
+    .footer-brand .logo {
+      margin-bottom:
+        17px;
+    }
+
+
+    .footer-brand p {
+
+      color:
+        #71839b;
+
+      font-size:
+        13px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .footer-links {
+
+      display:
+        flex;
+
+      gap:
+        90px;
+
+    }
+
+
+    .footer-column {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        9px;
+
+    }
+
+
+    .footer-column h4 {
+
+      color:
+        white;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        5px;
+
+    }
+
+
+    .footer-column a {
+
+      color:
+        #71839b;
+
+      font-size:
+        12px;
+
+      text-decoration:
+        none;
+
+    }
+
+
+    .footer-column a:hover {
+      color:
+        #60a5fa;
+    }
+
+
+    .footer-bottom {
+
+      padding-top:
+        22px;
+
+      border-top:
+        1px solid var(--border);
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      color:
+        #56687d;
+
+      font-size:
+        11px;
+
+    }
+
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+
+    .modal {
+
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        2000;
+
+      display:
+        none;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        20px;
+
+      background:
+        rgba(2,8,18,.78);
+
+      backdrop-filter:
+        blur(10px);
+
+    }
+
+
+    .modal.show {
+      display:
+        flex;
+    }
+
+
+    .modal-box {
+
+      position:
+        relative;
+
+      width:
+        min(
+          100%,
+          520px
+        );
+
+      padding:
+        32px;
+
+      border:
+        1px solid rgba(148,163,184,.2);
+
+      border-radius:
+        16px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #122238,
+          #091626
+        );
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,.5);
+
+    }
+
+
+    .close-modal {
+
+      position:
+        absolute;
+
+      top:
+        13px;
+
+      right:
+        15px;
+
+      width:
+        35px;
+
+      height:
+        35px;
+
+      border:
+        none;
+
+      border-radius:
+        8px;
+
+      background:
+        rgba(255,255,255,.05);
+
+      color:
+        #94a3b8;
+
+      font-size:
+        23px;
+
+    }
+
+
+    .close-modal:hover {
+
+      background:
+        rgba(255,255,255,.1);
+
+      color:
+        white;
+
+    }
+
+
+    .modal-box h2 {
+
+      font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+      font-size:
+        32px;
+
+      margin-bottom:
+        10px;
+
+    }
+
+
+    .modal-box > p {
+
+      color:
+        #8ea0b7;
+
+      font-size:
+        13px;
+
+      line-height:
+        1.7;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .modal-track-row {
+
+      display:
+        flex;
+
+      gap:
+        9px;
+
+    }
+
+
+    .modal-track-row input {
+
+      flex:
+        1;
+
+      min-width:
+        0;
+
+      height:
+        46px;
+
+      padding:
+        0 12px;
+
+      border:
+        1px solid rgba(148,163,184,.2);
+
+      border-radius:
+        8px;
+
+      outline:
+        none;
+
+      background:
+        #091625;
+
+      color:
+        white;
+
+    }
+
+
+    .modal-track-row input:focus {
+
+      border-color:
+        #3b82f6;
+
+    }
+
+
+    .request-result {
+
+      padding:
+        16px;
+
+      border:
+        1px solid rgba(96,165,250,.16);
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(59,130,246,.05);
+
+      color:
+        #dbeafe;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .result-id {
+
+      color:
+        #60a5fa;
+
+      font-size:
+        18px;
+
+      font-weight:
+        800;
+
+      margin:
+        5px 0 7px;
+
+    }
+
+
+    .result-row {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      padding-top:
+        8px;
+
+      margin-top:
+        8px;
+
+      border-top:
+        1px solid rgba(255,255,255,.06);
+
+      color:
+        #8ea0b7;
+
+    }
+
+
+    .result-row strong {
+      color:
+        #dbeafe;
+    }
+
+
+    .result-error {
+
+      padding:
+        11px 13px;
+
+      border:
+        1px solid rgba(248,113,113,.2);
+
+      border-radius:
+        8px;
+
+      background:
+        rgba(239,68,68,.08);
+
+      color:
+        #fca5a5;
+
+      font-size:
+        12px;
+
+    }
+
+
+    /* =========================================================
+       MOBILE NAV
+    ========================================================= */
+
+    /* =========================================================
+       PROFESSIONAL 3D GLASS CARDS
+    ========================================================= */
+    .hero-card,
+    .feature-card,
+    .showcase-card,
+    .pricing-card,
+    .request-card,
+    .testimonial-card,
+    .process-card,
+    .spec-card {
+      background:rgba(10,30,24,.85) !important;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(52,211,153,.15) !important;
+      box-shadow:0 20px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.1) !important;
+      color:#ecfdf5 !important;
+    }
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+
+        position:
+          absolute;
+
+        left:
+          20px;
+
+        right:
+          20px;
+
+        top:
+          70px;
+
+        display:
+          none;
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
+        gap:
+          0;
+
+        padding:
+          10px;
+
+        border:
+          1px solid var(--border);
+
+        border-radius:
+          12px;
+
+        background:
+          rgba(8,20,35,.98);
+
+        box-shadow:
+          var(--shadow);
+
+      }
+
+
+      .nav-links.mobile-open {
+        display:
+          flex;
+      }
+
+
+      .nav-links a {
+
+        padding:
+          12px;
+
+      }
+
+
+      .mobile-menu-btn {
+        display:
+          block;
+      }
+
+
+      .nav-actions .btn-outline {
+        display:
+          none;
+      }
+
+
+      .hero-container,
+      .request-layout,
+      .preview-container,
+      .contact-container {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .hero-container {
+        gap:
+          45px;
+      }
+
+
+      .services-grid,
+      .portfolio-grid {
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+
+      .process-grid {
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+
+      .contact-container {
+        gap:
+          45px;
+      }
+
+
+      .footer-top {
+        flex-direction:
+          column;
+      }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+      .section {
+        padding:
+          75px 0;
+      }
+
+
+      .section-container {
+        width:
+          min(
+            calc(100% - 30px),
+            var(--max)
+          );
+      }
+
+
+      .nav-container {
+        width:
+          calc(100% - 30px);
+      }
+
+
+      .hero {
+        padding:
+          80px 0 70px;
+      }
+
+
+      .hero h1 {
+        font-size:
+          45px;
+
+        letter-spacing:
+          -1.8px;
+      }
+
+
+      .hero-description {
+        font-size:
+          15px;
+      }
+
+
+      .hero-actions {
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+      }
+
+
+      .hero-actions .btn {
+        width:
+          100%;
+      }
+
+
+      .trust-grid {
+
+        width:
+          calc(100% - 30px);
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+
+      .trust-item {
+
+        padding:
+          15px 8px;
+
+        border-right:
+          none;
+
+        border-bottom:
+          1px solid var(--border);
+
+      }
+
+
+      .trust-item:nth-child(3),
+      .trust-item:nth-child(4) {
+        border-bottom:
+          none;
+      }
+
+
+      .services-grid,
+      .portfolio-grid,
+      .process-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .form-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .form-group.full {
+        grid-column:
+          auto;
+      }
+
+
+      .form-card {
+        padding:
+          23px 18px;
+      }
+
+
+      .tracking-search {
+
+        flex-direction:
+          column;
+
+      }
+
+
+      .tracking-search .btn {
+        width:
+          100%;
+      }
+
+
+      .tracking-card {
+        padding:
+          22px 17px;
+      }
+
+
+      .tracking-header {
+
+        flex-direction:
+          column;
+
+      }
+
+
+      .timeline {
+
+        grid-template-columns:
+          1fr 1fr;
+
+        row-gap:
+          24px;
+
+      }
+
+
+      .preview-menu {
+        display:
+          none;
+      }
+
+
+      .site-preview {
+        padding:
+          18px;
+      }
+
+
+      .preview-content {
+        padding:
+          40px 0 25px;
+      }
+
+
+      .preview-content h3 {
+        font-size:
+          25px;
+      }
+
+
+      .footer-links {
+
+        gap:
+          45px;
+
+        flex-wrap:
+          wrap;
+
+      }
+
+
+      .footer-bottom {
+
+        flex-direction:
+          column;
+
+      }
+
+
+      .modal-box {
+        padding:
+          25px 18px;
+      }
+
+
+      .modal-track-row {
+
+        flex-direction:
+          column;
+
+      }
+
+    }
+
+    /* =========================================================
+       3D WEBGL BACKGROUND CANVAS & 3D REALISTIC STYLING
+    ========================================================= */
+    #canvas-3d-customer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body {
+      position: relative;
+    }
+
+    .navbar, .section, footer, header, .modal-backdrop {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 3D Realistic Dark Glassmorphism & Depth Cards */
+    .hero-card,
+    .feature-card,
+    .showcase-card,
+    .pricing-card,
+    .request-card,
+    .testimonial-card,
+    .process-card,
+    .spec-card {
+      background: rgba(10, 30, 24, 0.85) !important;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(52, 211, 153, 0.15) !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+      color: #ecfdf5 !important;
+    }
+    /* FIX CUSTOMER TRACKING TIMELINE */
+.timeline-item.active .timeline-circle {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.timeline-item.done .timeline-circle {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+/* FORCE HEAVY CHECKMARK + BLUE COMPLETED CIRCLE */
+.progress-step.completed .progress-circle {
+    background: #1f3a5f !important;
+    border-color: #1f3a5f !important;
+    color: #ffffff !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+}
+
+.progress-step.current .progress-circle {
+    background: #1f3a5f !important;
+    border-color: #1f3a5f !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+  
+
+/* =========================================================
+   APNAWEB — PROFESSIONAL CUSTOMER DASHBOARD
+   Consolidated visual layer from Steps 2–16
+   Keeps existing HTML, JavaScript and 3D canvas intact.
+========================================================= */
+
+:root {
+  --pro-bg: #07111f;
+  --pro-bg-2: #0a1728;
+  --pro-panel: rgba(11, 24, 41, 0.82);
+  --pro-panel-strong: rgba(10, 25, 43, 0.92);
+  --pro-border: rgba(148, 163, 184, 0.16);
+  --pro-blue: #60a5fa;
+  --pro-text: #f8fafc;
+  --pro-soft: #a9b8ca;
+}
+
+/* Step 2–3: realistic page background */
+html {
+  background: var(--pro-bg);
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.10), transparent 28%),
+    radial-gradient(circle at 88% 34%, rgba(14, 165, 233, 0.07), transparent 26%),
+    linear-gradient(145deg, #050d18 0%, #07111f 48%, #09182a 100%) !important;
+  color: var(--pro-text);
+}
+
+/* Keep existing 3D canvas visible behind the interface */
+canvas {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.hero,
+.section {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::after,
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.045), transparent 42%);
+}
+
+/* Step 5: professional depth/glass cards */
+.hero-card,
+.feature-card,
+.showcase-card,
+.pricing-card,
+.request-card,
+.testimonial-card,
+.process-card,
+.spec-card,
+.form-card,
+.tracking-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15, 31, 51, 0.90),
+      rgba(7, 16, 29, 0.84)
+    ) !important;
+  border: 1px solid var(--pro-border) !important;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.065) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Step 6: navbar */
+.navbar {
+  background: rgba(5, 13, 24, 0.86) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.logo-mark {
+  box-shadow:
+    0 10px 30px rgba(37, 99, 235, 0.28),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+
+/* Step 7–8: hero polish without removing 3D */
+.hero {
+  padding-top: 115px;
+  padding-bottom: 100px;
+}
+
+.hero-label {
+  background: rgba(59, 130, 246, 0.09) !important;
+  border-color: rgba(96, 165, 250, 0.22) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.hero h1 {
+  text-shadow: 0 18px 50px rgba(0,0,0,.22);
+}
+
+/* Step 10: form card */
+.form-card {
+  padding: 34px !important;
+  border-radius: 20px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 29, 46, 0.90),
+      rgba(7, 13, 23, 0.86)
+    ) !important;
+  border: 1px solid rgba(148, 163, 184, 0.16) !important;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,.10), transparent 70%);
+  pointer-events: none;
+}
+
+/* Step 11–12: labels and fields */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #dbe4ef !important;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15, 28, 46, 0.92),
+      rgba(7, 15, 27, 0.92)
+    ) !important;
+  color: #f8fafc !important;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease,
+    transform .2s ease;
+}
+
+.form-group input,
+.form-group select {
+  height: 48px !important;
+  padding: 0 14px !important;
+}
+
+.form-group textarea {
+  min-height: 125px !important;
+  padding: 13px 14px !important;
+  resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #718096 !important;
+}
+
+.form-group select {
+  color: #dbeafe !important;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(96, 165, 250, 0.70) !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 34, 56, 0.96),
+      rgba(8, 17, 30, 0.96)
+    ) !important;
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.10),
+    0 8px 25px rgba(0,0,0,.16) !important;
+}
+
+/* Step 13: submit button container */
+.form-submit {
+  width: 100% !important;
+  margin-top: 20px !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Step 14: form messages */
+.form-message {
+  display: none;
+  margin-top: 16px !important;
+  padding: 14px 16px !important;
+  border-radius: 10px !important;
+  font-size: 13px;
+  line-height: 1.55;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.form-message.success {
+  background: rgba(34,197,94,.09) !important;
+  border: 1px solid rgba(34,197,94,.20) !important;
+  color: #86efac !important;
+}
+
+.form-message.error {
+  background: rgba(239,68,68,.09) !important;
+  border: 1px solid rgba(239,68,68,.20) !important;
+  color: #fca5a5 !important;
+}
+
+/* Step 15: request layout */
+.request-layout {
+  display: grid;
+  grid-template-columns: .82fr 1.18fr;
+  gap: 78px !important;
+  align-items: start;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Step 16: request information */
+.request-info {
+  padding-top: 25px;
+}
+
+.request-info h2 {
+  margin-bottom: 20px;
+  color: #f8fafc !important;
+  letter-spacing: -.8px;
+}
+
+.request-points {
+  display: grid;
+  gap: 14px !important;
+  margin-top: 28px;
+}
+
+.request-point {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(15,23,42,.28);
+  border: 1px solid rgba(148,163,184,.08);
+  transition:
+    background .2s ease,
+    transform .2s ease,
+    border-color .2s ease;
+}
+
+.request-point:hover {
+  background: rgba(30,41,59,.45);
+  border-color: rgba(96,165,250,.16);
+  transform: translateX(3px);
+}
+
+/* Preserve tracking functionality but visually integrate it */
+.tracking-search input {
+  background: rgba(248,250,252,.97) !important;
+}
+
+.tracking-card {
+  border-radius: 18px !important;
+}
+
+/* Responsive safety */
+@media (max-width: 900px) {
+  .request-layout {
+    grid-template-columns: 1fr !important;
+    gap: 45px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .form-card {
+    padding: 23px 18px !important;
+  }
+
+  .request-layout {
+    gap: 34px !important;
+  }
+}
+
+</style>
+
+  <!-- Three.js 3D Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Gradient Button — https://21st.dev/@serafimcloud/components/gradient-button -->
+  <link rel="stylesheet" href="/css/gradient-button.css">
+
+</head>
+
+
+<body>
+
+  <!-- Fixed Interactive 3D WebGL Background Canvas -->
+  <canvas id="canvas-3d-customer"></canvas>
+
+
+  <!-- =======================================================
+       NAVBAR
+  ======================================================== -->
+
+  <header class="navbar">
+
+    <div class="nav-container">
+
+      <a
+        href="#"
+        class="logo"
+      >
+
+        <span class="logo-mark">
+          W
+        </span>
+
+        <span>
+          WebStudio
+        </span>
+
+      </a>
+
+
+      <nav
+        class="nav-links"
+        id="navLinks"
+      >
+
+        <a href="#services">
+          Services
+        </a>
+
+        <a href="#work">
+          Our Work
+        </a>
+
+        <a href="#how">
+          How It Works
+        </a>
+
+        <a href="#track">
+          Track Request
+        </a>
+
+        <a href="#contact">
+          Contact
+        </a>
+
+      </nav>
+
+
+      <div class="nav-actions">
+
+        <a
+          href="#track"
+          class="btn btn-outline gradient-button gradient-button-variant"
+        >
+          Track Request
+        </a>
+
+        <a
+          href="#request"
+          class="btn btn-primary gradient-button"
+        >
+          Request Website
+        </a>
+
+        <button
+          type="button"
+          class="mobile-menu-btn gradient-button"
+          id="mobileMenuBtn"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-container">
+
+        <div class="hero-content">
+
+          <div class="hero-label">
+            Websites for local businesses
+          </div>
+
+
+          <h1>
+            Put your business
+            <span>online properly.</span>
+          </h1>
+
+
+          <p class="hero-description">
+            We build professional websites for restaurants,
+            shops, medical businesses, education services,
+            real estate companies and other local businesses.
+          </p>
+
+
+          <div class="hero-actions">
+        
+
+        <button type="button" class="btn gradient-button portfolio-link-button" onclick="window.location.href='/portfolio.html'">
+  View Portfolio →
+</button>
+
+          </div>
+
+
+          <div class="hero-note">
+            Tell us what you need. We handle the website.
+          </div>
+
+        </div>
+
+
+        <div class="browser">
+
+          <div class="browser-top">
+
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+
+            <div class="browser-address">
+              yourbusiness.com
+            </div>
+
+          </div>
+
+
+          <div class="mock-page">
+
+            <div class="mock-nav">
+
+              <div class="mock-logo-line"></div>
+
+              <div class="mock-nav-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+            </div>
+
+
+            <div class="mock-content">
+
+              <div class="mock-small"></div>
+
+              <h3>
+                A better website
+                for your business.
+              </h3>
+
+              <p>
+                Professional design, clear information
+                and an online presence built around
+                your business.
+              </p>
+
+              <span class="mock-button">
+                Contact Us
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TRUST
+    ====================================================== -->
+
+    <section class="trust">
+
+      <div class="trust-grid">
+
+        <div class="trust-item">
+
+          <div class="trust-number">
+            Simple
+          </div>
+
+          <div class="trust-label">
+            Clear process
+          </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+          <div class="trust-number">
+            Local
+          </div>
+
+          <div class="trust-label">
+            Business focused
+          </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+          <div class="trust-number">
+            Mobile
+          </div>
+
+          <div class="trust-label">
+            Responsive websites
+          </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+          <div class="trust-number">
+            Direct
+          </div>
+
+          <div class="trust-label">
+            Human support
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section
+      class="section services-section"
+      id="services"
+    >
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            What we build
+          </div>
+
+          <h2>
+            Websites designed around your business.
+          </h2>
+
+          <p>
+            You don't need a complicated system.
+            You need a professional website that clearly
+            tells customers who you are and how to reach you.
+          </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              ◆
+            </div>
+
+            <h3>
+              Business Websites
+            </h3>
+
+            <p>
+              Professional websites for local companies,
+              service providers and growing businesses.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              ◈
+            </div>
+
+            <h3>
+              Restaurant Websites
+            </h3>
+
+            <p>
+              Showcase your menu, location, contact details
+              and important information for customers.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              □
+            </div>
+
+            <h3>
+              Shop Websites
+            </h3>
+
+            <p>
+              Give your local shop a professional online
+              presence with products, information and contact.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              +
+            </div>
+
+            <h3>
+              Medical Websites
+            </h3>
+
+            <p>
+              Clear healthcare websites for clinics,
+              medical stores and healthcare services.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              A
+            </div>
+
+            <h3>
+              Education Websites
+            </h3>
+
+            <p>
+              Websites for educational services,
+              institutes, courses and training businesses.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              ⌂
+            </div>
+
+            <h3>
+              Real Estate Websites
+            </h3>
+
+            <p>
+              Present properties, services and contact
+              information in a clean professional format.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HOW IT WORKS
+    ====================================================== -->
+
+    <section
+      class="section process-section"
+      id="how"
+    >
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            How it works
+          </div>
+
+          <h2>
+            From idea to website without the confusion.
+          </h2>
+
+          <p>
+            A straightforward process from your first request
+            to your finished website.
+          </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+
+          <div class="process-card">
+
+            <div class="process-number">
+              01 / REQUEST
+            </div>
+
+            <h3>
+              Tell us what you need
+            </h3>
+
+            <p>
+              Fill out the website request form
+              with your business information.
+            </p>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <div class="process-number">
+              02 / REVIEW
+            </div>
+
+            <h3>
+              We review your request
+            </h3>
+
+            <p>
+              We look at your requirements and
+              contact you about the project.
+            </p>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <div class="process-number">
+              03 / BUILD
+            </div>
+
+            <h3>
+              We build the website
+            </h3>
+
+            <p>
+              Your website is designed and developed
+              around your business.
+            </p>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <div class="process-number">
+              04 / DELIVER
+            </div>
+
+            <h3>
+              Review and launch
+            </h3>
+
+            <p>
+              You review the first version,
+              request changes and prepare for launch.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PORTFOLIO
+    ====================================================== -->
+
+    <section
+      class="section"
+      id="work"
+    >
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            Our work
+          </div>
+
+          <h2>
+            A website style that fits your business.
+          </h2>
+
+          <p>
+            These examples show the kind of professional
+            business websites we can create.
+          </p>
+
+        </div>
+
+
+        <div class="portfolio-grid">
+
+
+          <div class="portfolio-card">
+
+            <div class="portfolio-image">
+
+              <div class="mock-site">
+
+                <div class="mock-header">
+
+                  <div class="mock-logo"></div>
+
+                  <div class="mock-links">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                </div>
+
+
+                <div class="mock-hero">
+
+                  <div class="mock-hero-label"></div>
+
+                  <h4>
+                    Better care starts here.
+                  </h4>
+
+                  <p>
+                    Professional healthcare information
+                    and services.
+                  </p>
+
+                  <button type="button">
+                    Contact Us
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="portfolio-info">
+
+              <h3>
+                Medical Clinic
+              </h3>
+
+              <p>
+                Healthcare website · Services · Contact
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="portfolio-card">
+
+            <div class="portfolio-image">
+
+              <div class="mock-site">
+
+                <div class="mock-header">
+
+                  <div class="mock-logo"></div>
+
+                  <div class="mock-links">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                </div>
+
+
+                <div class="mock-hero">
+
+                  <div class="mock-hero-label"></div>
+
+                  <h4>
+                    Good food. Good moments.
+                  </h4>
+
+                  <p>
+                    Explore our menu and discover
+                    our latest dishes.
+                  </p>
+
+                  <button type="button">
+                    Explore Menu
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="portfolio-info">
+
+              <h3>
+                Restaurant
+              </h3>
+
+              <p>
+                Restaurant website · Menu · Location
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="portfolio-card">
+
+            <div class="portfolio-image">
+
+              <div class="mock-site">
+
+                <div class="mock-header">
+
+                  <div class="mock-logo"></div>
+
+                  <div class="mock-links">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                </div>
+
+
+                <div class="mock-hero">
+
+                  <div class="mock-hero-label"></div>
+
+                  <h4>
+                    Your business, online.
+                  </h4>
+
+                  <p>
+                    A clean digital presence designed
+                    for local customers.
+                  </p>
+
+                  <button type="button">
+                    Learn More
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="portfolio-info">
+
+              <h3>
+                Local Business
+              </h3>
+
+              <p>
+                Business website · Services · Contact
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REQUEST WEBSITE
+    ====================================================== -->
+
+    <section
+      class="section request-section"
+      id="request"
+    >
+
+      <div class="section-container">
+
+        <div class="request-layout">
+
+
+          <div class="request-info">
+
+            <div class="section-label">
+              Start your project
+            </div>
+
+            <h2>
+              Tell us what your business needs.
+            </h2>
+
+            <p>
+              Give us a few details about your business
+              and the website you want. We will review
+              your request and contact you.
+            </p>
+
+
+            <div class="request-points">
+
+              <div class="request-point">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                Tell us about your business
+
+              </div>
+
+
+              <div class="request-point">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                Explain the website you need
+
+              </div>
+
+
+              <div class="request-point">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                Receive a request ID
+
+              </div>
+
+
+              <div class="request-point">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                Track your request
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-card">
+
+            <h3>
+              Request a Website
+            </h3>
+
+            <p>
+              Takes less than 2 minutes.
+            </p>
+
+
+            <form
+              id="requestForm"
+              novalidate
+            >
+
+              <div class="form-grid">
+
+
+                <div class="form-group">
+
+                  <label for="name">
+                    Full Name
+                  </label>
+
+                  <input
+                    id="name"
+                    name="ownerName"
+                    type="text"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    maxlength="100"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="business">
+                    Business Name
+                  </label>
+
+                  <input
+                    id="business"
+                    name="businessName"
+                    type="text"
+                    placeholder="Your business name"
+                    autocomplete="organization"
+                    maxlength="120"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="email">
+                    Email
+                  </label>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    maxlength="150"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="phone">
+                    Phone / WhatsApp
+                  </label>
+
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+91 XXXXX XXXXX"
+                    autocomplete="tel"
+                    maxlength="20"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="city">
+                    City
+                  </label>
+
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    placeholder="Your city"
+                    autocomplete="address-level2"
+                    maxlength="100"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="type">
+                    Business Category
+                  </label>
+
+                  <select
+                    id="type"
+                    name="businessType"
+                    required
+                  >
+
+                    <option value="">
+                      Select category
+                    </option>
+
+                    <option value="Restaurant">
+                      Restaurant
+                    </option>
+
+                    <option value="Shop">
+                      Shop
+                    </option>
+
+                    <option value="Business">
+                      Business
+                    </option>
+
+                    <option value="Medical">
+                      Medical
+                    </option>
+
+                    <option value="Education">
+                      Education
+                    </option>
+
+                    <option value="Real Estate">
+                      Real Estate
+                    </option>
+
+                    <option value="Other">
+                      Other
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="budget">
+                    Budget Range
+                  </label>
+
+                  <select
+                    id="budget"
+                    name="budget"
+                    required
+                  >
+
+                    <option value="">
+                      Select budget
+                    </option>
+
+                    <option value="₹5,000 – ₹10,000">
+                      ₹5,000 – ₹10,000
+                    </option>
+
+                    <option value="₹10,000 – ₹25,000">
+                      ₹10,000 – ₹25,000
+                    </option>
+
+                    <option value="₹25,000 – ₹50,000">
+                      ₹25,000 – ₹50,000
+                    </option>
+
+                    <option value="₹50,000+">
+                      ₹50,000+
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                  <label for="description">
+                    What do you need?
+                  </label>
+
+                  <textarea
+                    id="description"
+                    name="requirements"
+                    placeholder="Tell us about your business and what you want your website to do..."
+                    maxlength="3000"
+                    required
+                  ></textarea>
+
+                </div>
+
+              </div>
+
+
+              <button
+                type="submit"
+                id="submitRequestBtn"
+                class="btn btn-primary form-submit gradient-button"
+              >
+                Submit Website Request →
+              </button>
+
+
+              <div
+                class="form-message"
+                id="formMessage"
+                role="alert"
+                aria-live="polite"
+              ></div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TRACKING
+    ====================================================== -->
+
+    <section
+      class="section tracking"
+      id="track"
+    >
+
+      <div class="section-container">
+
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            Track your request
+          </div>
+
+          <h2>
+            Know what is happening with your project.
+          </h2>
+
+          <p>
+            Every website request gets a unique request ID.
+            Enter your ID to see the current project status.
+          </p>
+
+        </div>
+
+
+        <form
+          id="trackingForm"
+          class="tracking-search"
+        >
+
+          <input
+            id="trackingInput"
+            type="text"
+            placeholder="Enter request ID, e.g. APW-2026-1000"
+            autocomplete="off"
+            maxlength="40"
+            required
+          >
+
+
+          <button
+            type="submit"
+            class="btn btn-primary gradient-button"
+            id="trackingBtn"
+          >
+            Track Request
+          </button>
+
+        </form>
+
+
+        <div
+          id="trackingError"
+          class="tracking-error"
+          role="alert"
+        ></div>
+
+
+        <div
+          class="tracking-card"
+          id="trackingCard"
+          hidden
+        >
+
+          <div class="tracking-header">
+
+            <div>
+
+              <div
+                class="request-id"
+                id="trackingRequestId"
+              >
+                REQUEST
+              </div>
+
+              <h3 id="trackingBusiness">
+                Business
+              </h3>
+
+              <div
+                class="tracking-meta"
+                id="trackingMeta"
+              ></div>
+
+            </div>
+
+
+            <div
+              class="status-badge"
+              id="trackingStatus"
+            >
+              New
+            </div>
+
+          </div>
+
+
+          <div
+            class="timeline"
+            id="trackingTimeline"
+          ></div>
+
+
+          <div
+            class="tracking-note"
+            id="trackingNote"
+          >
+            Your request has been received.
+          </div>
+
+        </div>
+
+
+        <div
+          class="tracking-card tracking-empty"
+          id="trackingEmpty"
+        >
+          Enter your Request ID above to view your project status.
+        </div>
+
+      </div>
+
+    </section>
+
+
+   <!-- =====================================================
+     WEBSITE PREVIEW
+====================================================== -->
+
+<section class="section preview-section">
+
+  <div class="section-container">
+
+    <div class="preview-container">
+
+      <div class="preview-text">
+
+        <div class="section-label">
+          Website Preview
+        </div>
+
+        <h2>
+          See your website before it goes live.
+        </h2>
+
+        <p>
+          Once we create the first version of your website,
+          you can review it and tell us what you want changed
+          before it goes live.
+        </p>
+
+        <div class="preview-features">
+
+          <div class="preview-feature">
+            <span class="check">✓</span>
+            Review the design
+          </div>
+
+          <div class="preview-feature">
+            <span class="check">✓</span>
+            Check the content
+          </div>
+
+          <div class="preview-feature">
+            <span class="check">✓</span>
+            Request changes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="browser large-browser">
+
+        <div class="browser-top">
+
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+
+          <div class="browser-address">
+            your-business-website.com
+          </div>
+
+        </div>
+
+
+        <div class="site-preview">
+
+          <div class="preview-nav">
+
+            <div class="preview-logo">
+              YOUR BUSINESS
+            </div>
+
+            <div class="preview-menu">
+
+              <span>Home</span>
+              <span>Services</span>
+              <span>About</span>
+              <span>Contact</span>
+
+            </div>
+
+          </div>
+
+
+          <div class="preview-content">
+
+            <small>
+              WEBSITE PREVIEW
+            </small>
+
+            <h3>
+              Your business, now online.
+            </h3>
+
+            <p>
+              Review your website, check the content,
+              and request changes before we publish it.
+            </p>
+
+            <span class="preview-button">
+              Review Website
+            </span>
+
+          </div>
+
+
+          <div class="preview-card">
+
+            <div class="preview-card-title">
+              Preview Version 1.0
+            </div>
+
+            <div class="preview-lines">
+
+              <div class="preview-line"></div>
+
+              <div class="preview-line"></div>
+
+              <div class="preview-line short"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="cta">
+
+      <div class="cta-container">
+
+        <h2>
+          Ready to put your business online?
+        </h2>
+
+        <p>
+          Tell us what you need. We will take care
+          of the website.
+        </p>
+
+        <a
+          href="#request"
+          class="btn gradient-button"
+        >
+          Request Your Website →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section
+      class="contact-section"
+      id="contact"
+    >
+
+      <div class="contact-container">
+
+
+        <div class="contact-intro">
+
+          <span class="contact-label">
+            Contact
+          </span>
+
+          <h2>
+            Let's Build Your Website
+          </h2>
+
+          <p>
+            Have a website idea for your shop, business,
+            restaurant, medical store, education service
+            or other business? Contact us and tell us
+            what you need.
+          </p>
+
+          <a
+            href="#request"
+            class="contact-request-btn gradient-button"
+          >
+            Request a Website
+          </a>
+
+        </div>
+
+
+        <div class="contact-card">
+
+
+          <div class="contact-owner">
+
+            <div class="owner-avatar">
+              W
+            </div>
+
+            <div>
+
+              <small>
+                OWNER
+              </small>
+
+              <h3>
+                DARSHAN AURADI
+              </h3>
+
+            </div>
+
+          </div>
+
+
+          <div class="contact-details">
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                ✉
+              </div>
+
+              <div>
+
+                <small>
+                  Email
+                </small>
+
+                <a href="mailto:your@email.com">
+                  darshanauradi17@gmail.com
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                ☎
+              </div>
+
+              <div>
+
+                <small>
+                  Phone
+                </small>
+
+                <a href="tel:+91XXXXXXXXXX">
+                  +91 9380400181
+                  +91 8088828894
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                ◉
+              </div>
+
+              <div>
+
+                <small>
+                  WhatsApp
+                </small>
+
+                <a
+                  href="https://wa.me/9380400181"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat with us
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                ◆
+              </div>
+
+              <div>
+
+                <small>
+                  Business
+                </small>
+
+                <strong>
+                  WebStudio
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="footer-container">
+
+
+      <div class="footer-top">
+
+
+        <div class="footer-brand">
+
+          <a
+            href="#"
+            class="logo"
+          >
+
+            <span class="logo-mark">
+              W
+            </span>
+
+            <span>
+              WebStudio
+            </span>
+
+          </a>
+
+          <p>
+            Professional websites built around your business.
+            You explain what you need. We build it.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+
+          <div class="footer-column">
+
+            <h4>
+              Website
+            </h4>
+
+            <a href="#services">
+              Services
+            </a>
+
+            <a href="#work">
+              Our Work
+            </a>
+
+            <a href="#how">
+              How It Works
+            </a>
+
+            <a href="#contact">
+              Contact
+            </a>
+
+          </div>
+
+
+          <div class="footer-column">
+
+            <h4>
+              Project
+            </h4>
+
+            <a href="#request">
+              Request Website
+            </a>
+
+            <a href="#track">
+              Track Request
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 WebStudio. All rights reserved.
+        </span>
+
+        <span>
+          Built for businesses.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       TRACK MODAL
+  ======================================================== -->
+
+  <div
+    class="modal"
+    id="trackModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-box"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="trackModalTitle"
+    >
+
+
+      <button
+        type="button"
+        class="close-modal gradient-button"
+        id="closeTrackModalBtn"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+
+      <h2 id="trackModalTitle">
+        Track Your Request
+      </h2>
+
+
+      <p>
+        Enter the Request ID you received after
+        submitting your website request.
+      </p>
+
+
+      <form id="modalTrackingForm">
+
+        <div class="modal-track-row">
+
+          <input
+            id="modalTrackingInput"
+            type="text"
+            placeholder="APW-2026-0001"
+            maxlength="40"
+            autocomplete="off"
+            required
+          >
+
+          <button
+            type="submit"
+            class="btn btn-primary gradient-button"
+            id="modalTrackingBtn"
+          >
+            Track
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div
+        id="trackingResult"
+        style="margin-top:15px;"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    "use strict";
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const requestForm =
+      document.getElementById("requestForm");
+
+    const formMessage =
+      document.getElementById("formMessage");
+
+    const submitRequestBtn =
+      document.getElementById("submitRequestBtn");
+
+
+    const trackingForm =
+      document.getElementById("trackingForm");
+
+    const trackingInput =
+      document.getElementById("trackingInput");
+
+    const trackingBtn =
+      document.getElementById("trackingBtn");
+
+
+    const trackingCard =
+      document.getElementById("trackingCard");
+
+    const trackingEmpty =
+      document.getElementById("trackingEmpty");
+
+    const trackingError =
+      document.getElementById("trackingError");
+
+
+    const trackingRequestId =
+      document.getElementById("trackingRequestId");
+
+    const trackingBusiness =
+      document.getElementById("trackingBusiness");
+
+    const trackingMeta =
+      document.getElementById("trackingMeta");
+
+    const trackingStatus =
+      document.getElementById("trackingStatus");
+
+    const trackingTimeline =
+      document.getElementById("trackingTimeline");
+
+    const trackingNote =
+      document.getElementById("trackingNote");
+
+
+    const trackModal =
+      document.getElementById("trackModal");
+
+    const modalTrackingForm =
+      document.getElementById("modalTrackingForm");
+
+    const modalTrackingInput =
+      document.getElementById("modalTrackingInput");
+
+    const modalTrackingBtn =
+      document.getElementById("modalTrackingBtn");
+
+    const trackingResult =
+      document.getElementById("trackingResult");
+
+    const closeTrackModalBtn =
+      document.getElementById("closeTrackModalBtn");
+
+
+    const mobileMenuBtn =
+      document.getElementById("mobileMenuBtn");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    function toggleMobileMenu() {
+
+      navLinks.classList.toggle(
+        "mobile-open"
+      );
+
+      const isOpen =
+        navLinks.classList.contains(
+          "mobile-open"
+        );
+
+      mobileMenuBtn.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+    }
+
+
+    mobileMenuBtn.addEventListener(
+      "click",
+      toggleMobileMenu
+    );
+
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(function(link) {
+
+        link.addEventListener(
+          "click",
+          function() {
+
+            navLinks.classList.remove(
+              "mobile-open"
+            );
+
+            mobileMenuBtn.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       HELPERS
+    ========================================================= */
+
+    function escapeHTML(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    function showFormMessage(
+      message,
+      type
+    ) {
+
+      formMessage.className =
+        "form-message " + type;
+
+      formMessage.innerHTML =
+        message;
+
+      formMessage.style.display =
+        "block";
+
+    }
+
+
+    function hideFormMessage() {
+
+      formMessage.style.display =
+        "none";
+
+      formMessage.innerHTML =
+        "";
+
+      formMessage.className =
+        "form-message";
+
+    }
+
+
+    function showTrackingError(message) {
+
+      trackingError.textContent =
+        message;
+
+      trackingError.style.display =
+        "block";
+
+      trackingCard.hidden =
+        true;
+
+      trackingEmpty.style.display =
+        "block";
+
+    }
+
+
+    function clearTrackingError() {
+
+      trackingError.textContent =
+        "";
+
+      trackingError.style.display =
+        "none";
+
+    }
+
+
+    function normalizeStatus(status) {
+
+      const value =
+        String(status || "")
+          .trim()
+          .toLowerCase();
+
+
+      if (
+        value === "submitted" ||
+        value === "new"
+      ) {
+
+        return "New";
+
+      }
+
+
+      if (
+        value === "reviewed" ||
+        value === "contacted"
+      ) {
+
+        return "Contacted";
+
+      }
+
+
+      if (
+        value === "in progress" ||
+        value === "in-progress" ||
+        value === "in_progress"
+      ) {
+
+        return "In Progress";
+
+      }
+
+
+      if (
+        value === "completed" ||
+        value === "delivered" ||
+        value === "complete"
+      ) {
+
+        return "Delivered";
+
+      }
+
+
+      return "New";
+
+    }
+
+
+    function statusClass(status) {
+
+      return String(status)
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+
+    }
+
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "";
+      }
+
+
+      const date =
+        new Date(value);
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return String(value);
+
+      }
+
+
+      return date.toLocaleDateString(
+        undefined,
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       TIMELINE
+    ========================================================= */
+
+   function renderTimeline(status) {
+  const current = normalizeStatus(status);
+
+  const statuses = [
+    "New",
+    "Contacted",
+    "In Progress",
+    "Delivered"
+  ];
+
+  const currentIndex = statuses.indexOf(current);
+
+  const safeIndex =
+    currentIndex === -1
+      ? 0
+      : currentIndex;
+
+  trackingTimeline.innerHTML = statuses
+    .map(function(item, index) {
+
+      const completed = index <= safeIndex;
+      const currentStep = index === safeIndex;
+
+      const state =
+        currentStep
+          ? "active"
+          : completed
+            ? "done"
+            : "";
+
+      const symbol =
+        completed
+          ? "✔"
+          : String(index + 1);
+
+      const description =
+        currentStep
+          ? "Current"
+          : completed
+            ? "Completed"
+            : "Pending";
+
+      return `
+        <div class="timeline-item ${state}">
+
+          <div class="timeline-circle">
+            ${symbol}
+          </div>
+
+          <h4>
+            ${escapeHTML(item)}
+          </h4>
+
+          <p>
+            ${escapeHTML(description)}
+          </p>
+
+        </div>
+      `;
+    })
+    .join("");
+}
+
+
+    /* =========================================================
+       DISPLAY TRACKING DATA
+    ========================================================= */
+
+    function displayTrackingData(data) {
+
+      clearTrackingError();
+
+
+      trackingEmpty.style.display =
+        "none";
+
+
+      trackingCard.hidden =
+        false;
+
+
+      const status =
+        normalizeStatus(
+          data.status
+        );
+
+
+      const requestId =
+        data.requestId ||
+        data.id ||
+        "";
+
+
+      const business =
+        data.businessName ||
+        data.business ||
+        "Website Request";
+
+
+      const city =
+        data.city ||
+        "";
+
+
+      const created =
+        data.createdAt ||
+        data.date ||
+        "";
+
+
+      trackingRequestId.textContent =
+        "REQUEST #" + requestId;
+
+
+      trackingBusiness.textContent =
+        business;
+
+
+      trackingMeta.textContent =
+        city
+          ? city +
+            (
+              created
+                ? " · " + formatDate(created)
+                : ""
+            )
+          : created
+            ? formatDate(created)
+            : "";
+
+
+      trackingStatus.textContent = "";
+trackingStatus.className = "status-badge";
+trackingStatus.style.display = "none";
+
+
+      renderTimeline(status);
+
+
+      let note =
+        "Your request has been received.";
+
+
+      if (status === "Contacted") {
+
+        note =
+          "We have reviewed your request and will contact you regarding the project.";
+
+      }
+
+
+      if (status === "In Progress") {
+
+        note =
+          "Your website is currently being worked on. You will be able to preview it when the first version is ready.";
+
+      }
+
+
+      if (status === "Delivered") {
+
+        note =
+          "Your website request has been completed and delivered. Please contact us if you need any further changes.";
+
+      }
+
+
+      trackingNote.innerHTML =
+        "<strong>Current update:</strong> " +
+        escapeHTML(note);
+
+    }
+
+
+    /* =========================================================
+       FETCH REQUEST FROM SERVER
+    ========================================================= */
+
+    async function fetchRequest(requestId) {
+
+      const cleanId =
+        String(requestId || "")
+          .trim()
+          .toUpperCase()
+          .replace(/[.,;:!?]+$/, "");
+
+
+      if (!cleanId) {
+
+        throw new Error(
+          "Please enter a Request ID."
+        );
+
+      }
+
+
+      const response =
+        await fetch(
+          "/api/track/" +
+          encodeURIComponent(cleanId),
+          {
+            method: "GET",
+
+            headers: {
+              "Accept":
+                "application/json"
+            },
+
+            cache:
+              "no-store"
+          }
+        );
+
+
+      let data =
+        null;
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch {
+
+        data =
+          null;
+
+      }
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data?.message ||
+          data?.error ||
+          "Request not found."
+        );
+
+      }
+
+
+      return data;
+
+    }
+
+
+    /* =========================================================
+       PUBLIC TRACKING FORM
+    ========================================================= */
+
+    trackingForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        clearTrackingError();
+
+
+        const requestId =
+          String(trackingInput.value || "")
+            .trim()
+            .toUpperCase()
+            .replace(/[.,;:!?]+$/, "");
+
+
+        if (!requestId) {
+
+          showTrackingError(
+            "Please enter your Request ID."
+          );
+
+          return;
+
+        }
+
+
+        trackingBtn.disabled =
+          true;
+
+        trackingBtn.textContent =
+          "Checking...";
+
+
+        try {
+
+          const data =
+            await fetchRequest(
+              requestId
+            );
+
+
+          displayTrackingData(
+            data
+          );
+
+
+        } catch (error) {
+
+          showTrackingError(
+            error.message ||
+            "Unable to find this request."
+          );
+
+
+        } finally {
+
+          trackingBtn.disabled =
+            false;
+
+          trackingBtn.textContent =
+            "Track Request";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       REQUEST FORM SUBMISSION
+    ========================================================= */
+
+    requestForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        hideFormMessage();
+
+
+        if (
+          !requestForm.checkValidity()
+        ) {
+
+          requestForm.reportValidity();
+
+          return;
+
+        }
+
+
+        const payload = {
+
+          ownerName:
+            document
+              .getElementById("name")
+              .value
+              .trim(),
+
+
+          businessName:
+            document
+              .getElementById("business")
+              .value
+              .trim(),
+
+
+          email:
+            document
+              .getElementById("email")
+              .value
+              .trim(),
+
+
+          phone:
+            document
+              .getElementById("phone")
+              .value
+              .trim(),
+
+
+          city:
+            document
+              .getElementById("city")
+              .value
+              .trim(),
+
+
+          businessType:
+            document
+              .getElementById("type")
+              .value,
+
+
+          budget:
+            document
+              .getElementById("budget")
+              .value,
+
+
+          requirements:
+            document
+              .getElementById("description")
+              .value
+              .trim()
+
+        };
+
+
+        if (
+          !payload.ownerName ||
+          !payload.businessName ||
+          !payload.email ||
+          !payload.phone ||
+          !payload.city ||
+          !payload.businessType ||
+          !payload.budget ||
+          !payload.requirements
+        ) {
+
+          showFormMessage(
+            "Please fill in all required fields.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        submitRequestBtn.disabled =
+          true;
+
+        submitRequestBtn.textContent =
+          "Submitting...";
+
+
+        requestForm.classList.add(
+          "loading"
+        );
+
+
+        try {
+
+          const response =
+            await fetch(
+              "/api/submit",
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json",
+
+                  "Accept":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify(
+                    payload
+                  )
+              }
+            );
+
+
+          let data =
+            null;
+
+
+          try {
+
+            data =
+              await response.json();
+
+          } catch {
+
+            data =
+              null;
+
+          }
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              data?.message ||
+              data?.error ||
+              "Unable to submit your request."
+            );
+
+          }
+
+
+          const requestId =
+            data?.requestId ||
+            data?.id;
+
+
+          if (!requestId) {
+
+            throw new Error(
+              "Request was submitted, but the server did not return a Request ID."
+            );
+
+          }
+
+
+          showFormMessage(
+
+            "✓ Request submitted successfully. " +
+            "Your Request ID is " +
+
+            "<span class='request-id-link' " +
+            "data-request-id='" +
+            escapeHTML(requestId) +
+            "'>" +
+
+            escapeHTML(requestId) +
+
+            "</span>.",
+
+            "success"
+
+          );
+
+
+          requestForm.reset();
+
+
+          trackingInput.value =
+            requestId;
+
+
+          try {
+
+            const tracked =
+              await fetchRequest(
+                requestId
+              );
+
+
+            displayTrackingData(
+              tracked
+            );
+
+          } catch {
+
+            /*
+              Submission succeeded even if
+              immediate tracking fails.
+            */
+
+          }
+
+
+          setTimeout(
+            function() {
+
+              document
+                .getElementById("track")
+                .scrollIntoView({
+                  behavior:
+                    "smooth",
+
+                  block:
+                    "start"
+                });
+
+            },
+            600
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Request submission error:",
+            error
+          );
+
+
+          showFormMessage(
+
+            error.message ||
+            "Something went wrong. Please try again.",
+
+            "error"
+
+          );
+
+
+        } finally {
+
+          submitRequestBtn.disabled =
+            false;
+
+          submitRequestBtn.textContent =
+            "Submit Website Request →";
+
+          requestForm.classList.remove(
+            "loading"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       CLICK REQUEST ID
+    ========================================================= */
+
+    formMessage.addEventListener(
+      "click",
+      function(event) {
+
+        const target =
+          event.target.closest(
+            ".request-id-link"
+          );
+
+
+        if (!target) {
+          return;
+        }
+
+
+        const id =
+          target.dataset.requestId;
+
+
+        trackingInput.value =
+          id;
+
+
+        document
+          .getElementById("track")
+          .scrollIntoView({
+            behavior:
+              "smooth"
+          });
+
+      }
+    );
+
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+
+    function openTrackModal() {
+
+      trackModal.classList.add(
+        "show"
+      );
+
+
+      trackModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      document.body.classList.add(
+        "modal-open"
+      );
+
+
+      trackingResult.innerHTML =
+        "";
+
+
+      modalTrackingInput.value =
+        trackingInput.value || "";
+
+
+      setTimeout(
+        function() {
+
+          modalTrackingInput.focus();
+
+        },
+        100
+      );
+
+    }
+
+
+    function closeTrackModal() {
+
+      trackModal.classList.remove(
+        "show"
+      );
+
+
+      trackModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      document.body.classList.remove(
+        "modal-open"
+      );
+
+
+      trackingResult.innerHTML =
+        "";
+
+    }
+
+
+    closeTrackModalBtn.addEventListener(
+      "click",
+      closeTrackModal
+    );
+
+
+    trackModal.addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target ===
+          trackModal
+        ) {
+
+          closeTrackModal();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape" &&
+          trackModal.classList.contains(
+            "show"
+          )
+        ) {
+
+          closeTrackModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       TRACK MODAL FORM
+    ========================================================= */
+
+    modalTrackingForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        trackingResult.innerHTML =
+          "";
+
+
+        const requestId =
+          String(modalTrackingInput.value || "")
+            .trim()
+            .toUpperCase()
+            .replace(/[.,;:!?]+$/, "");
+
+
+        if (!requestId) {
+
+          trackingResult.innerHTML =
+            "<div class='result-error'>" +
+            "Please enter a Request ID." +
+            "</div>";
+
+          return;
+
+        }
+
+
+        modalTrackingBtn.disabled =
+          true;
+
+        modalTrackingBtn.textContent =
+          "Checking...";
+
+
+        try {
+
+          const data =
+            await fetchRequest(
+              requestId
+            );
+
+
+          const status =
+            normalizeStatus(
+              data.status
+            );
+
+
+          const business =
+            data.businessName ||
+            data.business ||
+            "Website Request";
+
+
+          const city =
+            data.city ||
+            "";
+
+
+          const created =
+            data.createdAt ||
+            data.date ||
+            "";
+
+
+          trackingResult.innerHTML = `
+
+            <div class="request-result">
+
+              <div
+                style="
+                  font-size:10px;
+                  color:#71839b;
+                  font-weight:800;
+                  letter-spacing:1px;
+                "
+              >
+                REQUEST FOUND
+              </div>
+
+              <div class="result-id">
+                ${escapeHTML(
+                  data.requestId ||
+                  requestId
+                )}
+              </div>
+
+              <strong>
+                ${escapeHTML(business)}
+              </strong>
+
+
+              <div class="result-row">
+
+                <span>
+                  Status:
+                </span>
+
+                <strong>
+                  ${escapeHTML(status)}
+                </strong>
+
+              </div>
+
+
+              ${
+                city
+                  ? `
+
+                    <div class="result-row">
+
+                      <span>
+                        City:
+                      </span>
+
+                      <strong>
+                        ${escapeHTML(city)}
+                      </strong>
+
+                    </div>
+
+                  `
+                  : ""
+              }
+
+
+              ${
+                created
+                  ? `
+
+                    <div class="result-row">
+
+                      <span>
+                        Submitted:
+                      </span>
+
+                      <strong>
+                        ${escapeHTML(
+                          formatDate(created)
+                        )}
+                      </strong>
+
+                    </div>
+
+                  `
+                  : ""
+              }
+
+            </div>
+
+          `;
+
+
+          displayTrackingData(
+            data
+          );
+
+
+        } catch (error) {
+
+          trackingResult.innerHTML =
+            `
+
+              <div class="result-error">
+
+                ${escapeHTML(
+                  error.message ||
+                  "Request not found."
+                )}
+
+              </div>
+
+            `;
+
+        } finally {
+
+          modalTrackingBtn.disabled =
+            false;
+
+          modalTrackingBtn.textContent =
+            "Track";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       OPEN MODAL FROM NAV TRACK BUTTON
+    ========================================================= */
+
+    document
+      .querySelectorAll(
+        'a[href="#track"]'
+      )
+      .forEach(function(link) {
+
+        /*
+          Keep the normal page tracking section.
+          The modal is available for future use.
+        */
+
+        link.addEventListener(
+          "click",
+          function() {
+
+            if (
+              window.innerWidth <= 900
+            ) {
+
+              navLinks.classList.remove(
+                "mobile-open"
+              );
+
+              mobileMenuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       STARTUP
+    ========================================================= */
+
+    window.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        /*
+          Requests belong to the server.
+          No localStorage request system is used.
+        */
+
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        const requestId =
+          params.get(
+            "requestId"
+          );
+
+
+        if (requestId) {
+
+          trackingInput.value =
+            requestId;
+
+
+          trackingForm.dispatchEvent(
+            new Event(
+              "submit",
+              {
+                bubbles:
+                  true,
+
+                cancelable:
+                  true
+              }
+            )
+          );
+
+        }
+
+      }
+    );
+
+  </script>
+
+  <!-- Realistic 3D Background Engine & Interactive 3D Card Tilt -->
+  <script src="/js/3d-customer.js"></script>
+
+  <!-- UI/UX Micro-Interactions Engine -->
+  <script src="/js/ui-ux.js"></script>
+
+</body>
+</html>

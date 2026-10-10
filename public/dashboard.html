@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebStudio — Customer Website Leads & Workspace</title>
+
+    <!-- Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Design System & Dashboard Stylesheet -->
+    <link rel="stylesheet" href="/css/ui-ux.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <!-- Gradient Button — https://21st.dev/@serafimcloud/components/gradient-button -->
+    <link rel="stylesheet" href="/css/gradient-button.css">
+</head>
+
+<body class="dash-body">
+
+    <!-- =========================================================
+         AUTHENTICATION / LOGIN SCREEN
+         ========================================================= -->
+    <section id="loginScreen" class="login">
+
+        <!-- Left Showcase Panel with 3D Layered Browser Mockup -->
+        <div class="login__visual">
+            <div class="login__brand">
+                <div class="login__brand-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                Web<span>Studio</span>
+            </div>
+
+            <div class="login__visual-content">
+                <span class="login__eyebrow">
+                    Production Lead Engine
+                </span>
+
+                <h2>
+                    Manage client leads &<br>
+                    <span>delivery workflow.</span>
+                </h2>
+
+                <p>
+                    Track incoming website requests from local business owners, review specific requirements, update build progress, and accelerate delivery from one central workspace.
+                </p>
+
+                <!-- Subtle 3D Layered Browser Preview -->
+                <div class="login__preview-container">
+                    <div class="browser-mock-3d" id="previewBrowserCard">
+                        <div class="browser-chrome">
+                            <div class="browser-dots">
+                                <span class="browser-dot red"></span>
+                                <span class="browser-dot yellow"></span>
+                                <span class="browser-dot green"></span>
+                            </div>
+                            <div class="browser-url-bar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span>apnaweb.in/client-portal</span>
+                            </div>
+                            <span class="browser-badge">Live System</span>
+                        </div>
+
+                        <div class="browser-viewport">
+                            <img src="/photos/customer-homepage.png" alt="Customer Website Interface" loading="lazy">
+                            <div class="browser-overlay-chip">
+                                <span class="status-dot"></span>
+                                <span>Instant WhatsApp & Form Sync</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="login__mini-stats">
+                    <div>
+                        <strong>Real-time</strong>
+                        <span>Lead intake</span>
+                    </div>
+                    <div>
+                        <strong>4-Stage</strong>
+                        <span>Project pipeline</span>
+                    </div>
+                    <div>
+                        <strong>100%</strong>
+                        <span>Data control</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Login Card -->
+        <div class="login__side">
+            <form id="loginForm" class="login__card">
+                <div class="login__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                </div>
+
+                <div class="login__heading">
+                    <h1>Workspace Login</h1>
+                    <p class="login__sub">
+                        Sign in to access your WebStudio customer requests and client management portal.
+                    </p>
+                </div>
+
+                <label class="field">
+                    <span>Username</span>
+                    <div class="field-input-wrapper">
+                        <svg class="field-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Enter workspace username"
+                            required
+                            autocomplete="username"
+                        >
+                    </div>
+                </label>
+
+                <label class="field">
+                    <span>Password</span>
+                    <div class="field-input-wrapper">
+                        <svg class="field-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter secure password"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </div>
+                </label>
+
+                <button type="submit" class="btn btn--primary gradient-button">
+                    <span>Sign in to Dashboard</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+
+                <p id="loginStatus" class="form__status error"></p>
+
+                <div class="login__footer">
+                    <span>WebStudio Workspace</span>
+                    <span>Encrypted & Verified</span>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+         MAIN APPLICATION DASHBOARD
+         ========================================================= -->
+    <section id="dashScreen" class="dash hidden">
+
+        <!-- Top Navigation -->
+        <header class="dash__top">
+            <div class="dash__top-row">
+                <div class="dash__brand-group">
+                    <a href="/" class="dash__brand-logo">
+                        <div class="dash__brand-badge">W</div>
+                        <span>WebStudio</span>
+                    </a>
+                    <div class="dash__divider"></div>
+                    <div class="dash__system-pill">
+                        <span class="dash__system-dot"></span>
+                        <span>Live Database Connected</span>
+                    </div>
+                </div>
+
+                <div class="dash__top-actions">
+                    <a href="/" class="dash__site-link" target="_blank" rel="noopener">
+                        <span>View Customer Site</span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+
+                    <div class="dash__user-profile">
+                        <div class="dash__avatar">D</div>
+                        <div class="dash__user-meta">
+                            <strong>Darshan</strong>
+                            <span>Owner</span>
+                        </div>
+                    </div>
+
+                    <button id="logoutBtn" class="topbar__owner gradient-button" type="button" title="Log out of session">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <span>Sign out</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Workspace -->
+        <main class="dash__main">
+
+            <!-- Section Header -->
+            <div class="dash__intro">
+                <div>
+                    <span class="dash__eyebrow">Production Dashboard</span>
+                    <h1>Website Requests & Pipeline</h1>
+                    <p>Track incoming requests from local business owners, review specific needs, and manage delivery status.</p>
+                </div>
+
+                <div class="dash__intro-actions">
+                    <button type="button" class="dash__action-btn gradient-button" onclick="loadSubmissions()" title="Refresh requests list">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                        <span>Sync</span>
+                    </button>
+
+                    <a href="/" class="dash__home-btn gradient-button gradient-button-variant">
+                        <span>Customer Landing Page</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Statistics Grid (Populated dynamically by dashboard.js) -->
+            <div class="dash__stats" id="statCards">
+                <!-- Stat cards with statNumTotal, statNumNew, statNumProgress, statNumDelivered -->
+            </div>
+
+            <!-- Requests Table Section -->
+            <section class="requests-panel">
+
+                <div class="requests-panel__header">
+                    <div>
+                        <span class="dash__eyebrow">Customer Intake</span>
+                        <h2>All Website Requests</h2>
+                    </div>
+
+                    <div class="requests-panel__count">
+                        <span>Active Pipeline</span>
+                    </div>
+                </div>
+
+                <!-- Toolbar Controls -->
+                <div class="dash__controls">
+                    <div class="search-wrapper">
+                        <span class="search-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </span>
+                        <input
+                            type="search"
+                            id="searchBox"
+                            placeholder="Filter by customer name, business, phone or location..."
+                        >
+                    </div>
+
+                    <div class="filter-wrapper">
+                        <span class="filter-label">Filter Status</span>
+                        <select id="statusFilter" aria-label="Filter requests by status">
+                            <option value="all">All statuses</option>
+                            <option value="New">New</option>
+                            <option value="Contacted">Contacted</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Delivered">Delivered</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="dash__table-wrap">
+                    <table class="dash__table">
+                        <thead>
+                            <tr>
+                                <th>Date & ID</th>
+                                <th>Customer</th>
+                                <th>Business</th>
+                                <th>Website Type</th>
+                                <th>Contact Details</th>
+                                <th>Requirements</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tableBody">
+                            <!-- Populated dynamically by dashboard.js -->
+                        </tbody>
+                    </table>
+
+                    <!-- Empty State -->
+                    <div id="emptyState" class="dash__empty hidden">
+                        <div class="empty-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h3>No requests match criteria</h3>
+                        <p>When customers submit website inquiries on your landing page, they will appear here automatically in real time.</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Bottom Workflow Cards -->
+            <div class="dash__bottom">
+                <div class="dash__bottom-card">
+                    <div class="dash__bottom-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Standardized Lead Delivery</strong>
+                        <p>Contact new clients promptly within 24-48 hours. Advance the stage indicator from "New" to "Contacted", "In Progress", and "Delivered" as milestones complete.</p>
+                    </div>
+                </div>
+
+                <div class="dash__bottom-card">
+                    <div class="dash__bottom-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 14 14"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Automated Real-time Sync</strong>
+                        <p>The workspace continuously polls the backend API every 30 seconds. Inquiries submitted via WhatsApp or web forms populate immediately.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="dash__footer">
+            <span>© 2026 WebStudio. Production Workspace.</span>
+            <span>All systems operational • Port 3000 Active</span>
+        </footer>
+
+    </section>
+
+    <!-- =========================================================
+         CUSTOMER REQUIREMENTS INSPECTION MODAL
+         ========================================================= -->
+    <div id="modalBackdrop" class="modal-backdrop">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modalTitle">Customer Request Details</h3>
+                <button type="button" class="modal-close-btn gradient-button" id="modalCloseBtn" aria-label="Close modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-detail-grid">
+                    <div class="modal-detail-item">
+                        <label>Customer Name</label>
+                        <value id="modalCustomerName">—</value>
+                    </div>
+                    <div class="modal-detail-item">
+                        <label>Business</label>
+                        <value id="modalBusinessName">—</value>
+                    </div>
+                    <div class="modal-detail-item">
+                        <label>Phone</label>
+                        <value id="modalPhone">—</value>
+                    </div>
+                    <div class="modal-detail-item">
+                        <label>Email</label>
+                        <value id="modalEmail">—</value>
+                    </div>
+                    <div class="modal-detail-item">
+                        <label>Location</label>
+                        <value id="modalLocation">—</value>
+                    </div>
+                    <div class="modal-detail-item">
+                        <label>Budget Tier</label>
+                        <value id="modalBudget">—</value>
+                    </div>
+                </div>
+
+                <div class="modal-req-box">
+                    <label>Complete Requirements & Message</label>
+                    <div class="modal-req-content" id="modalRequirements">—</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container for Micro-Interactions -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Application Logic Scripts -->
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/3d-owner.js"></script>
+    <script src="/js/ui-ux.js"></script>
+
+</body>
+</html>

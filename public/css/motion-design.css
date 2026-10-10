@@ -1,0 +1,294 @@
+/* =========================================================
+   WEBSTUDIO — MOTION DESIGN LAYER
+   Scroll progress · navbar elevation · scrollspy
+   hero entrance · focus polish · back-to-top
+   ---------------------------------------------------------
+   Strictly additive: this layer never changes the existing
+   theme, colors, layout or behavior. Every animation
+   respects prefers-reduced-motion.
+   ========================================================= */
+
+/* 1. Anchor offset so the sticky/fixed navbar never covers
+      the top of a section after an in-page jump. */
+html {
+  scroll-padding-top: 96px;
+}
+
+/* 2. Selection polish */
+::selection {
+  background: rgba(59, 130, 246, 0.85);
+  color: #ffffff;
+}
+
+/* 3. Keyboard focus rings for links and buttons
+      (form fields already carry their own focus styles). */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+/* 4. Top scroll-progress bar */
+.md-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.md-progress.md-show {
+  opacity: 1;
+}
+
+.md-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.55);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+
+/* 5. Navbar elevation on scroll.
+      The shadow lives on a pseudo-element so it can animate
+      in BOTH directions without touching the navbar's own
+      transition list (which differs per page). */
+.navbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 0 18px 42px -14px rgba(2, 8, 20, 0);
+  transition: box-shadow 0.35s ease;
+}
+
+.navbar.md-scrolled::after {
+  box-shadow: 0 18px 42px -14px rgba(2, 8, 20, 0.5);
+}
+
+/* 6. Navigation underline + scrollspy active state.
+      Scoped to .nav-container (index page) so the portfolio
+      page keeps its own existing underline untouched. */
+.nav-container .nav-links a {
+  position: relative;
+}
+
+.nav-container .nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-container .nav-links a:hover::after,
+.nav-container .nav-links a.md-active::after {
+  transform: scaleX(1);
+}
+
+/* Active color must beat the theme's !important nav colors. */
+.nav-container .nav-links a.md-active {
+  color: #60a5fa !important;
+}
+
+/* Portfolio already draws its own accent-colored underline;
+   this only switches it on for the current section. */
+.nav-links a.md-active::after {
+  width: 100%;
+}
+
+/* Portfolio's pill CTA has no underline, so mark the active
+      state with a subtle fill instead. */
+.nav-links a.nav-cta.md-active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* 7. Hero entrance — opt-in per page via html.md-hero-intro.
+      fill-mode: backwards hides content only until its delay,
+      then releases so pointer-tilt scripts keep full control. */
+.md-hero-intro .navbar {
+  animation: md-nav-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.md-hero-intro .hero-label {
+  animation: md-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s backwards;
+}
+
+.md-hero-intro .hero h1 {
+  animation: md-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+}
+
+.md-hero-intro .hero-description {
+  animation: md-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s backwards;
+}
+
+.md-hero-intro .hero-actions {
+  animation: md-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+}
+
+.md-hero-intro .hero-note {
+  animation: md-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.5s backwards;
+}
+
+.md-hero-intro .browser {
+  animation: md-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s backwards;
+}
+
+@keyframes md-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes md-nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 8. Button press feedback (filter only — never fights the
+      theme's transform/background rules). */
+.btn:active,
+.btn-promax:active {
+  filter: brightness(0.94);
+}
+
+/* 9. Logo micro-motion */
+.logo-mark {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo:hover .logo-mark {
+  transform: translateY(-2px) scale(1.06);
+}
+
+/* 10. Back-to-top button */
+.md-top {
+  position: fixed;
+  right: 24px;
+  bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: rgba(6, 12, 24, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  color: #d7deea;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 9500;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(0.9);
+  box-shadow: 0 12px 30px rgba(2, 8, 20, 0.45);
+  transition: opacity 0.3s ease, visibility 0.3s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease, color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.md-top.md-top--show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.md-top:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: rgba(96, 165, 250, 0.6);
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.35);
+}
+
+/* 11. Subtle themed scrollbar */
+html {
+  scrollbar-color: rgba(148, 163, 184, 0.45) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(96, 165, 250, 0.65);
+  background-clip: padding-box;
+}
+
+/* 12. Reduced motion — keep everything visible and static */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .md-hero-intro .navbar,
+  .md-hero-intro .hero-label,
+  .md-hero-intro .hero h1,
+  .md-hero-intro .hero-description,
+  .md-hero-intro .hero-actions,
+  .md-hero-intro .hero-note,
+  .md-hero-intro .browser {
+    animation: none !important;
+  }
+
+  .md-progress,
+  .navbar::after,
+  .nav-container .nav-links a::after {
+    transition: none !important;
+  }
+
+  .md-top {
+    transform: none !important;
+    transition: opacity 0.01s linear, visibility 0.01s linear;
+  }
+
+  .md-top:hover {
+    transform: none !important;
+  }
+
+  .logo:hover .logo-mark {
+    transform: none !important;
+  }
+}
+

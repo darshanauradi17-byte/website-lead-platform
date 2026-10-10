@@ -1,0 +1,1089 @@
+/* =========================================================
+   WEBSTUDIO — REALISTIC CUSTOMER EXPERIENCE
+   Visual redesign only.
+   Existing HTML / API / JS / 3D engine remain intact.
+========================================================= */
+
+:root {
+  --real-bg: #f5f7fa;
+  --real-surface: #ffffff;
+  --real-surface-soft: #f8fafc;
+
+  --real-text: #172033;
+  --real-heading: #111827;
+  --real-muted: #64748b;
+  --real-light-muted: #94a3b8;
+
+  --real-blue: #2563eb;
+  --real-blue-dark: #1d4ed8;
+  --real-blue-soft: #eff6ff;
+
+  --real-border: #e2e8f0;
+  --real-border-dark: #cbd5e1;
+
+  --real-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+
+  --real-shadow-lg:
+    0 20px 55px rgba(15, 23, 42, 0.09);
+
+  --real-radius: 14px;
+}
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+html {
+  background: var(--real-bg) !important;
+}
+
+body {
+  background:
+    linear-gradient(
+      180deg,
+      #f8fafc 0%,
+      #f5f7fa 55%,
+      #eef2f7 100%
+    ) !important;
+
+  color: var(--real-text) !important;
+
+  font-family:
+    "IBM Plex Sans",
+    Arial,
+    sans-serif !important;
+}
+
+
+/* Keep 3D background exactly where it belongs */
+
+#canvas-3d-customer {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  z-index: 0 !important;
+
+  pointer-events: none !important;
+}
+
+body > *:not(#canvas-3d-customer) {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navbar {
+  background:
+    rgba(255, 255, 255, 0.92) !important;
+
+  backdrop-filter:
+    blur(16px) !important;
+
+  -webkit-backdrop-filter:
+    blur(16px) !important;
+
+  border-bottom:
+    1px solid rgba(15, 23, 42, 0.08) !important;
+
+  box-shadow:
+    0 1px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+.nav-container {
+  height: 72px !important;
+}
+
+.logo {
+  color: var(--real-heading) !important;
+}
+
+.logo-mark {
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    ) !important;
+
+  border-radius: 9px !important;
+
+  box-shadow:
+    0 6px 18px rgba(37, 99, 235, 0.18) !important;
+}
+
+.nav-links a {
+  color: #475569 !important;
+}
+
+.nav-links a:hover {
+  color: var(--real-blue) !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+  border-radius: 9px !important;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease !important;
+}
+
+.btn-primary {
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    ) !important;
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.18) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px) !important;
+
+  box-shadow:
+    0 11px 25px rgba(37, 99, 235, 0.22) !important;
+}
+
+.btn-outline {
+  color: #334155 !important;
+
+  background: #ffffff !important;
+
+  border:
+    1px solid var(--real-border) !important;
+}
+
+.btn-outline:hover {
+  color: var(--real-blue) !important;
+
+  border-color:
+    #bfdbfe !important;
+
+  background:
+    #f8fbff !important;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.96),
+      rgba(248,250,252,0.90)
+    ) !important;
+
+  padding:
+    110px 0 95px !important;
+}
+
+.hero::before {
+  background:
+    radial-gradient(
+      circle,
+      rgba(37,99,235,0.08),
+      transparent 68%
+    ) !important;
+}
+
+.hero-label {
+  background:
+    #eff6ff !important;
+
+  border:
+    1px solid #dbeafe !important;
+
+  color:
+    #2563eb !important;
+}
+
+.hero-label::before {
+  background:
+    #2563eb !important;
+}
+
+.hero h1 {
+  color:
+    #111827 !important;
+
+  letter-spacing:
+    -2.5px !important;
+}
+
+.hero h1 span {
+  color:
+    #2563eb !important;
+}
+
+.hero-description {
+  color:
+    #64748b !important;
+}
+
+
+/* =========================================================
+   BROWSER / MOCK WEBSITE
+========================================================= */
+
+.browser {
+  background:
+    #ffffff !important;
+
+  border:
+    1px solid #dbe2ea !important;
+
+  border-radius:
+    16px !important;
+
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.12) !important;
+
+  overflow:
+    hidden !important;
+}
+
+.browser-top {
+  background:
+    #f8fafc !important;
+
+  border-bottom:
+    1px solid #e2e8f0 !important;
+}
+
+.browser-address {
+  background:
+    #ffffff !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  color:
+    #94a3b8 !important;
+}
+
+.mock-page {
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f1f5f9
+    ) !important;
+}
+
+.mock-logo-line {
+  background:
+    #2563eb !important;
+}
+
+.mock-content h3 {
+  color:
+    #111827 !important;
+}
+
+.mock-content p {
+  color:
+    #64748b !important;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+  position: relative;
+}
+
+.section-label {
+  color:
+    #2563eb !important;
+
+  font-weight:
+    700 !important;
+
+  letter-spacing:
+    1.2px !important;
+}
+
+.section-title,
+.section h2 {
+  color:
+    #111827 !important;
+}
+
+
+/* =========================================================
+   GENERAL CARDS
+========================================================= */
+
+.hero-card,
+.feature-card,
+.showcase-card,
+.pricing-card,
+.request-card,
+.testimonial-card,
+.process-card,
+.spec-card,
+.form-card {
+
+  background:
+    rgba(255, 255, 255, 0.96) !important;
+
+  backdrop-filter:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  border-radius:
+    var(--real-radius) !important;
+
+  box-shadow:
+    var(--real-shadow) !important;
+
+  color:
+    var(--real-text) !important;
+}
+
+.hero-card:hover,
+.feature-card:hover,
+.showcase-card:hover,
+.pricing-card:hover,
+.process-card:hover {
+  transform:
+    translateY(-3px) !important;
+
+  box-shadow:
+    var(--real-shadow-lg) !important;
+}
+
+
+/* =========================================================
+   REQUEST FORM
+========================================================= */
+
+.form-card {
+  padding:
+    34px !important;
+}
+
+.form-card h2,
+.form-card h3 {
+  color:
+    #111827 !important;
+}
+
+.form-card label {
+  color:
+    #334155 !important;
+
+  font-weight:
+    600 !important;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+
+  background:
+    #ffffff !important;
+
+  color:
+    #172033 !important;
+
+  border:
+    1px solid #dbe2ea !important;
+
+  border-radius:
+    9px !important;
+
+  box-shadow:
+    none !important;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease !important;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+
+  outline:
+    none !important;
+
+  border-color:
+    #60a5fa !important;
+
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,0.08) !important;
+}
+
+
+/* =========================================================
+   CUSTOMER TRACKING
+========================================================= */
+
+.tracking-section {
+  background:
+    #f5f7fa !important;
+}
+
+.tracking-search {
+  background:
+    transparent !important;
+}
+
+.tracking-search input {
+
+  background:
+    #ffffff !important;
+
+  color:
+    #172033 !important;
+
+  border:
+    1px solid #dbe2ea !important;
+
+  border-radius:
+    10px !important;
+
+  box-shadow:
+    0 4px 15px rgba(15,23,42,0.04) !important;
+}
+
+.tracking-search input:focus {
+
+  outline:
+    none !important;
+
+  border-color:
+    #60a5fa !important;
+
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,0.08) !important;
+}
+
+
+/* Main tracking card */
+
+.tracking-card {
+
+  background:
+    #ffffff !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  border-radius:
+    16px !important;
+
+  box-shadow:
+    0 12px 35px rgba(15,23,42,0.07) !important;
+
+  color:
+    #172033 !important;
+}
+
+.tracking-empty {
+  color:
+    #64748b !important;
+}
+
+
+/* Tracking heading */
+
+.tracking-label {
+  color:
+    #2563eb !important;
+
+  font-weight:
+    700 !important;
+}
+
+.tracking-business {
+  color:
+    #111827 !important;
+}
+
+.tracking-date {
+  color:
+    #64748b !important;
+}
+
+
+/* =========================================================
+   STATUS TIMELINE
+========================================================= */
+
+.tracking-progress {
+  position: relative;
+}
+
+.progress-step {
+  position: relative;
+
+  color:
+    #64748b !important;
+}
+
+.progress-step small {
+  color:
+    #334155 !important;
+
+  font-weight:
+    600 !important;
+}
+
+.progress-step em {
+  color:
+    #94a3b8 !important;
+
+  font-style:
+    normal !important;
+}
+
+
+/* Circle */
+
+.progress-circle {
+
+  width:
+    42px !important;
+
+  height:
+    42px !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  border-radius:
+    50% !important;
+
+  background:
+    #ffffff !important;
+
+  border:
+    2px solid #dbe2ea !important;
+
+  color:
+    #94a3b8 !important;
+
+  font-family:
+    Arial, sans-serif !important;
+
+  font-size:
+    15px !important;
+
+  font-weight:
+    700 !important;
+}
+
+
+/* Completed */
+
+.progress-step.completed .progress-circle {
+
+  background:
+    #2563eb !important;
+
+  border-color:
+    #2563eb !important;
+
+  color:
+    #ffffff !important;
+
+  font-family:
+    Arial, sans-serif !important;
+
+  font-size:
+    19px !important;
+
+  font-weight:
+    900 !important;
+
+  line-height:
+    1 !important;
+
+  box-shadow:
+    0 5px 14px rgba(37,99,235,0.20) !important;
+}
+
+
+/* Current */
+
+.progress-step.current .progress-circle {
+
+  background:
+    #2563eb !important;
+
+  border-color:
+    #2563eb !important;
+
+  color:
+    #ffffff !important;
+
+  font-weight:
+    800 !important;
+
+  box-shadow:
+    0 5px 14px rgba(37,99,235,0.20) !important;
+}
+
+.progress-step.completed small,
+.progress-step.current small {
+
+  color:
+    #172033 !important;
+}
+
+.progress-step.completed em {
+
+  color:
+    #2563eb !important;
+}
+
+.progress-step.current em {
+
+  color:
+    #2563eb !important;
+
+  font-weight:
+    600 !important;
+}
+
+
+/* =========================================================
+   TRACKING UPDATE
+========================================================= */
+
+.tracking-update {
+
+  background:
+    #f8fafc !important;
+
+  border:
+    1px solid #e8edf3 !important;
+
+  border-radius:
+    10px !important;
+
+  color:
+    #475569 !important;
+}
+
+.tracking-update strong {
+  color:
+    #172033 !important;
+}
+
+
+/* =========================================================
+   WEBSITE PREVIEW
+========================================================= */
+
+.preview-section {
+
+  background:
+    #ffffff !important;
+}
+
+.preview-text h2 {
+  color:
+    #111827 !important;
+}
+
+.preview-text p {
+  color:
+    #64748b !important;
+}
+
+.preview-feature {
+  color:
+    #334155 !important;
+}
+
+.preview-feature .check {
+
+  color:
+    #2563eb !important;
+
+  font-weight:
+    900 !important;
+}
+
+
+/* Preview browser */
+
+.large-browser {
+
+  background:
+    #ffffff !important;
+
+  border:
+    1px solid #dbe2ea !important;
+
+  box-shadow:
+    0 20px 50px rgba(15,23,42,0.10) !important;
+}
+
+.site-preview {
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8fafc
+    ) !important;
+}
+
+.preview-nav {
+
+  border-bottom:
+    1px solid #e2e8f0 !important;
+}
+
+.preview-logo {
+  color:
+    #111827 !important;
+}
+
+.preview-menu span {
+  color:
+    #64748b !important;
+}
+
+.preview-content small {
+  color:
+    #2563eb !important;
+}
+
+.preview-content h3 {
+  color:
+    #111827 !important;
+}
+
+.preview-content p {
+  color:
+    #64748b !important;
+}
+
+.preview-button {
+
+  background:
+    #2563eb !important;
+
+  color:
+    #ffffff !important;
+
+  border-radius:
+    8px !important;
+}
+
+.preview-card {
+
+  background:
+    #ffffff !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,0.06) !important;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+
+  background:
+    linear-gradient(
+      135deg,
+      #172033,
+      #24324a
+    ) !important;
+
+  color:
+    #ffffff !important;
+}
+
+.cta h2 {
+  color:
+    #ffffff !important;
+}
+
+.cta p {
+  color:
+    #cbd5e1 !important;
+}
+
+.cta .btn {
+  background:
+    #ffffff !important;
+
+  color:
+    #1d4ed8 !important;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-section {
+  background:
+    #f5f7fa !important;
+}
+
+.contact-intro h2 {
+  color:
+    #111827 !important;
+}
+
+.contact-intro p {
+  color:
+    #64748b !important;
+}
+
+.contact-card {
+
+  background:
+    #ffffff !important;
+
+  border:
+    1px solid #e2e8f0 !important;
+
+  border-radius:
+    16px !important;
+
+  box-shadow:
+    0 12px 35px rgba(15,23,42,0.07) !important;
+}
+
+.owner-avatar {
+
+  background:
+    #2563eb !important;
+
+  color:
+    #ffffff !important;
+}
+
+.contact-owner small {
+  color:
+    #64748b !important;
+}
+
+.contact-owner h3 {
+  color:
+    #111827 !important;
+}
+
+.contact-item {
+  border-bottom:
+    1px solid #edf1f5 !important;
+}
+
+.contact-item small {
+  color:
+    #94a3b8 !important;
+}
+
+.contact-item a,
+.contact-item strong {
+  color:
+    #334155 !important;
+}
+
+.contact-item a:hover {
+  color:
+    #2563eb !important;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+  background:
+    #111827 !important;
+
+  color:
+    #cbd5e1 !important;
+
+  border-top:
+    1px solid #1e293b !important;
+}
+
+footer a {
+  color:
+    #cbd5e1 !important;
+}
+
+footer a:hover {
+  color:
+    #ffffff !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD AI-STYLE GREEN OVERRIDES
+========================================================= */
+
+[style*="glass"] {
+  backdrop-filter:
+    none !important;
+}
+
+
+/* Prevent excessive glowing */
+
+.hero-card,
+.feature-card,
+.showcase-card,
+.pricing-card,
+.request-card,
+.testimonial-card,
+.process-card,
+.spec-card,
+.form-card,
+.tracking-card,
+.contact-card {
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+    padding:
+      85px 0 70px !important;
+  }
+
+  .hero-container {
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      45px !important;
+  }
+
+  .hero h1 {
+    font-size:
+      clamp(42px, 9vw, 62px) !important;
+  }
+
+  .nav-links {
+    gap:
+      16px !important;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .nav-container {
+    height:
+      66px !important;
+  }
+
+  .nav-links {
+    display:
+      none;
+  }
+
+  .mobile-menu-btn {
+    display:
+      flex !important;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+  }
+
+  .section {
+    padding:
+      70px 0 !important;
+  }
+
+  .form-card {
+    padding:
+      24px !important;
+  }
+
+  .tracking-card {
+    padding:
+      22px !important;
+  }
+
+  .progress-circle {
+    width:
+      38px !important;
+
+    height:
+      38px !important;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+
+  outline:
+    3px solid rgba(37,99,235,0.25) !important;
+
+  outline-offset:
+    3px !important;
+}

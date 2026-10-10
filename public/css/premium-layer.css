@@ -1,0 +1,122 @@
+/* =========================================================
+   WEBSTUDIO — PREMIUM VISUAL LAYER
+   Techniques adapted from design tools, hand-implemented:
+   · Realtime Colors → role-based palette tokens + contrast
+   · Haikei → generated SVG decor (waves, blob, scatter)
+   · Motion Primitives → word-stagger text reveal
+   · Godly → film-grain texture
+   ---------------------------------------------------------
+   Strictly additive. Respects prefers-reduced-motion and
+   RULES.md (no giant backgrounds, no excessive gradients).
+   ========================================================= */
+
+/* 1. Realtime-Colors style role tokens (current site palette)
+      Contrast (WCAG) vs --pk-bg #F5F5F7:
+        --pk-text      #1C1A1D  ≈ 15.9:1  AAA
+        --pk-text-soft #4B5563  ≈ 7.6:1   AAA
+        --pk-primary   #2563EB  ≈ 5.2:1   AA  (body/UI text)
+        --pk-accent    #3B82F6  ≈ 3.7:1   UI/large text only
+      On dark --pk-navy #060C18:
+        --pk-accent-on-dark #60A5FA ≈ 8.7:1  AAA */
+:root {
+  --pk-bg: #f5f5f7;
+  --pk-surface: #ffffff;
+  --pk-navy: #060c18;
+  --pk-text: #1c1a1d;
+  --pk-text-soft: #4b5563;
+  --pk-primary: #2563eb;
+  --pk-accent: #3b82f6;
+  --pk-accent-on-dark: #60a5fa;
+  --pk-line: rgba(148, 163, 184, 0.28);
+  --pk-shadow-sm: 0 2px 8px rgba(6, 12, 24, 0.06);
+  --pk-shadow-md: 0 12px 32px -8px rgba(6, 12, 24, 0.14);
+}
+
+/* 2. Film-grain texture (same technique as portfolio's .noise)
+      Static — creates a realistic, tactile surface. */
+.pk-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+/* 3. Haikei-style decor hosts.
+      isolate keeps negative-z decor above the section
+      background but below its content (same pattern the
+      site already uses for .hero/.section). */
+section.cta,
+section.contact-section,
+section.request-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.pk-decor {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Layered waves — bottom of the CTA band */
+.pk-waves {
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  width: 100%;
+  height: 130px;
+}
+
+/* Organic blob — contact section, top right */
+.pk-blob {
+  top: 6%;
+  right: 1%;
+  width: 250px;
+  height: 250px;
+}
+
+/* Circle scatter — request section, bottom left.
+      bottom clears the max parallax shift (24px). */
+.pk-scatter {
+  left: 16px;
+  bottom: 48px;
+  width: 230px;
+  height: 230px;
+}
+
+/* 4. Motion-Primitives style word-stagger reveal.
+      Each word carries an inline --w index; the container
+      (.hero h1) still runs the group entrance from the
+      motion-design layer, so words rise inside it. */
+.md-hero-intro .hero h1 .md-w {
+  display: inline-block;
+  animation: md-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(0.18s + var(--w, 0) * 0.07s);
+}
+
+/* On small screens the decor would only add noise */
+@media (max-width: 760px) {
+  .pk-waves {
+    height: 90px;
+    bottom: 12px;
+  }
+
+  .pk-blob,
+  .pk-scatter {
+    display: none;
+  }
+}
+
+/* 5. Reduced motion — everything static and visible */
+@media (prefers-reduced-motion: reduce) {
+  .md-hero-intro .hero h1 .md-w {
+    animation: none !important;
+  }
+
+  .pk-decor {
+    transform: none !important;
+    transition: none;
+  }
+}
