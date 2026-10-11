@@ -1,433 +1,128 @@
-Design System
+# Design System Specification
 
-1. Design direction
+**Project:** ApnaWeb Lead Platform  
+**Specification Version:** 2.0.0  
+**Design Philosophy:** Human-Crafted, Editorial, High-Trust, and Purpose-Driven  
 
-The visual direction is:
+---
 
-Professional business workspace + calm modern customer experience + restrained 3D depth.
+## 1. Visual Identity & Design Philosophy
 
-The design should look like a real production service rather than an experimental AI-generated interface.
+The ApnaWeb platform rejects generic, "AI-generated" templates and noisy glassmorphism in favor of a **human-crafted, trustworthy, and high-conversion aesthetic**.
 
-2. Color direction
+The system balances two distinct visual environments:
+1. **The Creative Showcase (Elena Voss Template Style):** An obsidian-dark luxury editorial experience crafted to convey creative excellence and technical mastery for agency work.
+2. **The Business Workspace:** A deep navy and slate-blue environment designed for clarity, data readability, and quick lead triaging.
 
-The existing implementation contains multiple visual layers. The consolidated professional customer-dashboard layer currently uses a dark navy foundation with blue accents:
+---
 
-Background: #07111f
+## 2. Color Palettes & Design Tokens
 
-Secondary background: #0a1728
+### 2.1 Elena Voss Portfolio Palette (`public/portfolio.html`)
+Inspired by the award-winning Elena Voss template from 21st.dev, this palette pairs deep dark backgrounds with energetic ember and flame accents.
 
-Panel: translucent dark navy
+| Token Name | Hex / CSS Value | Semantic Purpose |
+| :--- | :--- | :--- |
+| `--bg-black` | `#070707` | Core canvas background |
+| `--bg-hero-glow` | `#180d08` | Ambient radial hero backlight |
+| `--accent-orange` | `#F0640D` | Primary accent highlight and active pills |
+| `--accent-red` | `#B01205` | Deep ember accent glow |
+| `--accent-gradient` | `linear-gradient(135deg, #F16B0D 0%, #E61416 100%)` | CTA button gradients and featured borders |
+| `--text-white` | `#ffffff` | Primary headings and prominent titles |
+| `--text-muted` | `rgba(255, 255, 255, 0.70)` | Secondary descriptive text and body copy |
+| `--text-dim` | `rgba(255, 255, 255, 0.40)` | Captions, dates, and subtle borders |
+| `--border-line` | `rgba(255, 255, 255, 0.15)` | Card separators and subtle glass outlines |
 
-Accent blue: #60a5fa
+### 2.2 Business Workspace & Owner Dashboard Palette (`dashboard.html` & `index.html`)
+A calm, authoritative palette engineered for visual comfort and high data contrast during prolonged usage.
 
-Primary text: #f8fafc
+| Token Name | Hex Value | Semantic Purpose |
+| :--- | :--- | :--- |
+| `--surface-canvas` | `#07111f` | Deep navy foundational background |
+| `--surface-panel` | `#0a1728` | Container card and data table surface |
+| `--surface-border` | `rgba(255, 255, 255, 0.08)` | Structural hairline borders |
+| `--brand-blue` | `#60a5fa` | Primary interactive links, icons, and focus rings |
+| `--text-primary` | `#f8fafc` | Maximum contrast typography (WCAG AAA) |
+| `--text-secondary` | `#a9b8ca` | Readable secondary metadata |
 
-Soft text: #a9b8ca
+### 2.3 Status Indicator Badges
+Status indicators pair distinct semantic colors with subtle pulsing dots to ensure visual clarity without relying on color alone:
 
-The customer visual layer also contains:
+* **`New`:** Indigo / Sky Blue (`#38bdf8`) — Pulse dot indicates newly arrived lead.
+* **`Contacted`:** Amber / Orange (`#f59e0b`) — Indicates client outreach completed.
+* **`In Progress`:** Emerald Green (`#10b981`) — Indicates active design and engineering.
+* **`Delivered`:** Violet / Purple (`#8b5cf6`) — Indicates project completed and live.
 
-cyan/electric blue
+---
 
-amber
+## 3. Typography Hierarchy
 
-slate/titanium
+The platform employs a dual-font pairing strategy that combines geometric precision with editorial character:
 
-dark navy
+| Role | Font Family | Weights | Usage |
+| :--- | :--- | :--- | :--- |
+| **Primary Display & Body** | `Host Grotesk` / `Inter` | 400, 500, 600, 700, 800 | Navigation, headlines, lead form, table data, buttons |
+| **Editorial Accent** | `Playfair Display` | 400 Italic, 600, 700 | Case study titles, quote accents, serif hero highlights |
+| **Monospace / Metrics** | `JetBrains Mono` | 400, 600 | Request IDs (`#1004`), timestamps, status codes, telemetry |
 
-translucent glass
+---
 
-These colors should remain restrained.
+## 4. Surfaces, Borders & Glassmorphism
 
-3. Surfaces
+* **Translucent Layering:** Panels use backdrop blur (`backdrop-filter: blur(16px)`) with dark alpha layers (`rgba(7, 7, 7, 0.65)` to `rgba(10, 23, 40, 0.85)`).
+* **Border Radii:**
+  - Action Buttons & Chips: Fully rounded pill shape (`9999px`).
+  - Cards & Mockup Viewports: Smooth modern corners (`16px` to `24px`).
+  - Inputs & Modals: Crisp containers (`12px` to `16px`).
+* **Subtle Hairline Borders:** `1px` borders with low opacity ensure clean visual separation without visual clutter.
 
-Use:
+---
 
-dark navy backgrounds for professional workspace screens;
+## 5. Button Architecture & Interactive States
 
-translucent glass panels where depth helps;
+Buttons utilize the **21st.dev Gradient Button System** with modern `@property` CSS hover sweeps:
 
-subtle borders;
+1. **Primary Action (`.gradient-button`):** Radiant dark-rose/ember sweep for high-priority user actions ("Request Your Website", "Submit Request").
+2. **Secondary Action (`.gradient-button-variant`):** Subtle blue/teal gradient for neutral actions ("Learn More", "View Demo").
+3. **WhatsApp Connect (`.gradient-button-whatsapp`):** Emerald green styling (`#25D366`) for instant WhatsApp chat engagement.
+4. **Destructive Action (`.gradient-button-danger`):** Red border/glow used exclusively for lead deletion in the admin dashboard.
 
-restrained shadows;
+---
 
-high text contrast.
+## 6. 3D Interaction Physics & Graphics Subsystem
 
-The current CSS uses glass-like panels with blur, borders, and layered shadows.
+### 6.1 Three.js WebGL Scene (Customer Experience)
+* **Visual Composition:** A dark, moody space featuring a physical glass orb, metallic torus ring, floating octahedron, and warm amber and cyan directional lighting.
+* **Lighting Model:** Ambient light paired with a mouse-following point light for interactive depth.
+* **Fallback Guarantee:** An automatic 2D Canvas gradient fallback renders seamlessly on devices where WebGL is unavailable or disabled.
 
-4. Customer website
+### 6.2 Browser Frame Pointer Tilt
+* **Physics:** Matrix perspective transformation (`perspective: 1000px`) that smoothly responds to pointer coordinates within a restrained bounding box (`±6deg`).
+* **Spring Release:** Smooth CSS transition (`cubic-bezier(0.16, 1, 0.3, 1)`) resets rotation back to flat plane when the pointer exits.
 
-The public customer website should emphasize:
+---
 
-clear explanation of the service;
+## 7. Motion Design System & Micro-Interactions
 
-strong request CTA;
+| Interaction | Implementation | Timing / Easing |
+| :--- | :--- | :--- |
+| **Scroll Reveal** | `IntersectionObserver` via `data-motion` | `400ms` `ease-out`, staggered by `100ms` |
+| **Top Scroll Progress Bar** | Fixed `2px` linear gradient bar at viewport top | Synchronized with native `window.scrollY` |
+| **Sticky Header Blur** | Adds frosted background class when scrolled past `40px` | `300ms` smooth transition |
+| **Live Showcase Switcher** | GSAP timeline swapping preview iframe / image | `350ms` opacity + slight scale reveal |
 
-portfolio examples;
+### Accessibility Compliance (`prefers-reduced-motion`)
+When `prefers-reduced-motion: reduce` is detected in media queries:
+* All 3D tilt physics are disabled.
+* Staggered entrance animations resolve immediately.
+* Parallax decor elements remain fixed.
 
-request tracking;
+---
 
-contact information;
+## 8. Responsive Breakpoints
 
-simple website preview;
-
-professional typography and spacing.
-
-Navigation includes the requested core areas:
-
-Home
-
-Services
-
-Our Work
-
-How It Works
-
-Track Request
-
-Contact
-
-Primary CTA:
-
-Request Your Website
-
-5. Request form
-
-Use a single-page form.
-
-Visual structure:
-
-clear section heading;
-
-grouped customer/business information;
-
-large requirements field;
-
-custom budget field;
-
-optional-details section;
-
-clear primary submit button;
-
-inline validation;
-
-success state with Request ID.
-
-Do not visually overload the form with animation.
-
-6. Tracking UI
-
-The tracking area should visually communicate progress.
-
-Timeline:
-
-New → Contacted → In Progress → Delivered
-
-Completed/current timeline circles use a strong blue treatment in the current visual implementation.
-
-The tracking card should prioritize:
-
-Request ID
-
-Business name
-
-City
-
-Current status
-
-Timeline
-
-7. Owner login
-
-The owner login should feel like a premium business workspace.
-
-The current login design includes a browser-style 3D preview with:
-
-browser chrome
-
-floating depth
-
-subtle perspective
-
-workspace copy
-
-Avoid putting a large decorative banner in front of the actual login task.
-
-8. Owner dashboard
-
-Dashboard hierarchy:
-
-Header
-  ↓
-Dashboard introduction
-  ↓
-Useful statistics
-  ↓
-Search/filter controls
-  ↓
-Requests workspace
-  ↓
-Request details / actions
-  ↓
-Workflow guidance
-
-The current dashboard describes itself as:
-
-Website Requests & Pipeline
-
-and is intended to track incoming local-business requests.
-
-9. Dashboard data presentation
-
-Desktop:
-
-structured request table
-
-Mobile:
-
-responsive request cards or equivalent compact layout
-
-Useful request information includes:
-
-Request ID
-
-Owner/customer
-
-Business
-
-Business type
-
-Contact
-
-City
-
-Budget
-
-Requirements
-
-Status
-
-Dates
-
-Actions
-
-10. Status styling
-
-The existing UI uses status-specific visual classes:
-
-status-new
-status-contacted
-status-in-progress
-status-delivered
-
-Pulse-dot colors are already defined for status indication.
-
-The visual distinction should be understandable without relying only on color.
-
-11. 3D system
-
-Customer 3D environment
-
-The current Three.js environment uses:
-
-PerspectiveCamera
-
-WebGLRenderer
-
-ACES filmic tone mapping
-
-fog
-
-ambient light
-
-directional key light
-
-warm fill light
-
-mouse-following point light
-
-physical glass orb
-
-metallic torus ring
-
-octahedron/diamond
-
-The objects float and rotate slowly.
-
-Browser preview 3D
-
-The owner/dashboard preview uses subtle perspective rotation driven by pointer position.
-
-Default rotation is intentionally small and returns smoothly when the pointer leaves.
-
-Card micro-tilt
-
-Cards use small perspective rotations, approximately a few degrees, rather than dramatic 3D movement.
-
-12. Motion system
-
-Scroll reveals
-
-Elements marked with:
-
-data-motion
-
-are revealed using IntersectionObserver.
-
-Optional:
-
-data-motion-delay="0.1"
-
-supports staggered timing.
-
-Magnetic buttons
-
-Buttons using:
-
-.btn-promax
-[data-magnetic]
-
-receive subtle pointer attraction.
-
-Ripple
-
-Buttons using .btn-promax or .btn can receive a click ripple.
-
-Motion design layer
-
-An additive layer lives in two files:
-
-css/motion-design.css
-
-js/motion-design.js
-
-It provides:
-
-top scroll progress bar
-
-navbar elevation after scrolling
-
-scrollspy active navigation state (md-active and aria-current)
-
-animated navigation underline
-
-opt-in hero entrance (html.md-hero-intro, JavaScript-gated)
-
-focus-visible rings for links and buttons
-
-back-to-top button
-
-sticky-nav anchor offset via scroll-padding-top
-
-selection, scrollbar and button-press polish
-
-The layer is loaded on the customer homepage and the portfolio page. It does not modify theme colors, layout, or existing behavior, and every animation respects prefers-reduced-motion.
-
-Premium visual layer
-
-A second additive layer lives in two files:
-
-css/premium-layer.css
-
-js/premium-layer.js
-
-It adapts techniques from common design tools without depending on them:
-
-Realtime Colors style role tokens (--pk-*) with documented WCAG contrast ratios
-
-Haikei style hand-generated SVG decor: layered waves (CTA band), organic blob (contact section), circle scatter (request section)
-
-Motion Primitives style word-stagger hero heading reveal (.md-w elements with --w delay index)
-
-Godly style static film-grain overlay (.pk-grain, same technique as the portfolio noise layer)
-
-Decor receives subtle scroll parallax capped at 24px and is hidden on small screens where it would only add noise. The layer respects prefers-reduced-motion and does not alter theme colors, layout, or existing behavior.
-
-13. Accessibility
-
-Respect reduced motion.
-
-The website preview explicitly checks:
-
-prefers-reduced-motion: reduce
-
-and skips the pointer tilt animation when requested.
-
-Important content must remain accessible when motion is disabled.
-
-14. Responsive behavior
-
-The application must work on:
-
-desktop
-
-tablet
-
-mobile
-
-The dashboard already includes a desktop/mobile preview switcher.
-
-On mobile, reduce visual complexity rather than forcing desktop-scale 3D.
-
-15. Design exclusions
-
-Do not add:
-
-giant animated backgrounds
-
-excessive floating objects
-
-continuous camera movement
-
-unnecessary 3D cards everywhere
-
-excessive gradients
-
-noisy glassmorphism
-
-chat UI
-
-payment UI
-
-customer-account UI
-
-16. Branding
-
-The final website name is intentionally undecided.
-
-Use a replaceable brand placeholder until the name is finalized.
-
-
-17. Button system
-
-All buttons use the Gradient Button component from
-https://21st.dev/@serafimcloud/components/gradient-button (Serafim / 21st.dev, MIT):
-animated radial-gradient background, glowing 1px border, CSS-only hover animation
-via registered @property custom properties.
-
-React app:
-
-Reference component: src/components/ui/gradient-button.tsx
-
-Shared Button: src/components/ui/Button.tsx (all variants render as gradient buttons)
-
-Styles: src/app/globals.css (loaded unlayered so they win over utility overrides)
-
-Static pages (customer site, portfolio, owner dashboard):
-
-Styles: public/css/gradient-button.css, linked after every other stylesheet
-
-Elements receive the gradient-button class in their HTML/JS templates
-
-Palettes:
-
-default — primary actions (dark rose sweep on hover)
-
-gradient-button-variant — secondary actions (blue/teal/lime)
-
-gradient-button-whatsapp — emerald, WhatsApp actions
-
-gradient-button-danger — red, destructive actions
-
-Decorative buttons inside website-preview mockups are content, not UI, and keep
-their mock styling.
-Do not create a final logo before the name is finalized.
+| Viewport Category | Breakpoint | Layout Adaptations |
+| :--- | :--- | :--- |
+| **Mobile** | `< 640px` | Single-column stack, full-width inputs, touch-friendly tap targets (`>= 48px`), compact dashboard cards |
+| **Tablet** | `640px – 1024px` | 2-column showcase grids, adaptive horizontal tracking timeline |
+| **Desktop / Wide** | `> 1024px` | Full multi-column data table, interactive side-by-side preview stage, 3D ambient canvas |

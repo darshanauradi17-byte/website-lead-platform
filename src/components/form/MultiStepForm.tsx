@@ -130,8 +130,8 @@ export function MultiStepForm() {
     setRateLimitError("");
 
     try {
-      // Create Lead record in store
-      const lead = createLeadFromForm(data);
+      // Submit lead to the backend (Next.js API -> Supabase)
+      const lead = await createLeadFromForm(data);
 
       // Save rate limit timestamp
       recentSubmissions.push(Date.now());
@@ -152,6 +152,11 @@ export function MultiStepForm() {
       }
     } catch (error) {
       console.error("Form submission error", error);
+      setRateLimitError(
+        error instanceof Error && error.message
+          ? error.message
+          : "Could not submit your request. Please check your connection and try again."
+      );
     } finally {
       setIsSubmitting(false);
     }

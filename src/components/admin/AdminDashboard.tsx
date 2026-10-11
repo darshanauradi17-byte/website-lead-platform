@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Lead, LeadStatus, ProjectStage, SlaStatus } from "@/lib/types";
-import { getStoredLeads, updateLeadStatus, updateLeadDetails, getLeadActivities, saveStoredLeads } from "@/lib/lead-store";
+import { getStoredLeads, updateLeadStatus, updateLeadDetails, adminLogin, adminLogout, getAdminToken } from "@/lib/lead-store";
 import { calculateSlaStatus, formatIndianPhone, getWhatsAppLink, formatDate, exportLeadsToCsv } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";

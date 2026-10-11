@@ -156,7 +156,7 @@
     .hero-section {
       position: relative;
       min-height: 100vh;
-      background-color: var(--bg-hero);
+      background-color: var(--bg-hero-glow);
       background-image:
         radial-gradient(65% 55% at 92% 6%, #F0640D 0%, rgba(240,100,13,0) 65%),
         radial-gradient(60% 55% at 4% 82%, #EC690F 0%, rgba(236,105,15,0) 65%),
@@ -490,7 +490,7 @@
       padding: 110px 4vw;
       background: #040404;
       text-align: center;
-      border-top: 1px solid var(--border-light);
+      border-top: 1px solid var(--border-line);
     }
 
     .contact-grid {
@@ -769,10 +769,8 @@
         </div>
 
         <div class="award-row">
-          <div class="award-row">
-            <div class="award-name">The Webby Awards</div>
-            <div class="award-year">2026 — OFFICIAL SELECTION</div>
-          </div>
+          <div class="award-name">The Webby Awards</div>
+          <div class="award-year">2026 — OFFICIAL SELECTION</div>
         </div>
 
         <div class="award-row">
@@ -826,22 +824,22 @@
 
         <form id="portfolioForm">
           <div>
-            <label style="font-size: 11px; font-weight: 700; uppercase tracking-wider text-transform: uppercase;">Your Full Name *</label>
+            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Your Full Name *</label>
             <input type="text" name="name" required placeholder="e.g. Ramesh Patel" class="input-field">
           </div>
 
           <div>
-            <label style="font-size: 11px; font-weight: 700; uppercase tracking-wider text-transform: uppercase;">WhatsApp Number *</label>
+            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">WhatsApp Number *</label>
             <input type="tel" name="phone" required placeholder="e.g. 9825012345" class="input-field">
           </div>
 
           <div>
-            <label style="font-size: 11px; font-weight: 700; uppercase tracking-wider text-transform: uppercase;">Business Name & Category *</label>
+            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Business Name & Category *</label>
             <input type="text" name="business" required placeholder="e.g. Patel Super Market (Kirana)" class="input-field">
           </div>
 
           <div>
-            <label style="font-size: 11px; font-weight: 700; uppercase tracking-wider text-transform: uppercase;">Message or Requirements</label>
+            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Message or Requirements</label>
             <textarea name="requirements" rows="3" placeholder="Tell us what features you need..." class="input-field"></textarea>
           </div>
 

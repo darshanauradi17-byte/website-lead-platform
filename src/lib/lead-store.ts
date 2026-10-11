@@ -1,197 +1,197 @@
 "use client";
 
-import { Lead, LeadMessage, LeadFile, LeadActivity, LeadStatus, ProjectStage, RequestFormData } from "./types";
-import { INITIAL_MOCK_LEADS, INITIAL_MOCK_MESSAGES, INITIAL_MOCK_FILES, INITIAL_MOCK_ACTIVITIES } from "./mock-data";
-import { generateRefId } from "./utils";
+/**
+ * Client-side data layer for the lead platform.
+ *
+ * All functions talk to the Next.js API routes (src/app/api/**), which use the
+ * server-only Supabase service-role client. Nothing is persisted in
+ * localStorage anymore — Supabase is the single source of truth.
+ *
+ * Admin functions send the bearer token from admin login (POST /api/admin/login).
+ */
 
-const STORAGE_KEY_LEADS = "apnaweb_leads_v2";
-const STORAGE_KEY_MESSAGES = "apnaweb_messages_v2";
-const STORAGE_KEY_FILES = "apnaweb_files_v2";
-const STORAGE_KEY_ACTIVITIES = "apnaweb_activities_v2";
+import { Lead, LeadMessage, LeadStatus, ProjectStage, RequestFormData } from "./types";
 
-export function getStoredLeads(): Lead[] {
-  if (typeof window === "undefined") return INITIAL_MOCK_LEADS;
+const ADMIN_TOKEN_KEY = "apnaweb_admin_token";
+
+// ---------------------------------------------------------------------------
+// Admin token helpers (stateless HMAC token issued by /api/admin/login)
+// ---------------------------------------------------------------------------
+
+export function getAdminToken(): string | null {
+  if (typeof window === "undefined") return null;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY_LEADS);
-    if (!raw) {
-      localStorage.setItem(STORAGE_KEY_LEADS, JSON.stringify(INITIAL_MOCK_LEADS));
-      return INITIAL_MOCK_LEADS;
-    }
-    return JSON.parse(raw);
+    return localStorage.getItem(ADMIN_TOKEN_KEY);
   } catch {
-    return INITIAL_MOCK_LEADS;
+    return null;
   }
 }
 
-export function saveStoredLeads(leads: Lead[]) {
+export function setAdminToken(token: string | null) {
   if (typeof window === "undefined") return;
   try {
-    localStorage.setItem(STORAGE_KEY_LEADS, JSON.stringify(leads));
+    if (token) {
+      localStorage.setItem(ADMIN_TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(ADMIN_TOKEN_KEY);
+    }
   } catch (e) {
-    console.error("Failed to save leads to storage", e);
+    console.error("Failed to persist admin token", e);
   }
 }
 
-export function getStoredMessages(leadId: string): LeadMessage[] {
-  if (typeof window === "undefined") return INITIAL_MOCK_MESSAGES.filter(m => m.lead_id === leadId);
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY_MESSAGES);
-    const allMsgs: LeadMessage[] = raw ? JSON.parse(raw) : INITIAL_MOCK_MESSAGES;
-    return allMsgs.filter(m => m.lead_id === leadId);
-  } catch {
-    return INITIAL_MOCK_MESSAGES.filter(m => m.lead_id === leadId);
+// ---------------------------------------------------------------------------
+// Shared fetch wrapper
+// ---------------------------------------------------------------------------
+
+export class ApiError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
   }
 }
 
-export function saveNewMessage(msg: Omit<LeadMessage, "id" | "created_at">): LeadMessage {
-  const newMsg: LeadMessage = {
-    ...msg,
-    id: `msg-${Date.now()}`,
-    created_at: new Date().toISOString(),
+async function apiFetch<T>(path: string, options: RequestInit = {}, withAuth = false): Promise<T> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...((options.headers as Record<string, string>) || {}),
   };
 
-  if (typeof window !== "undefined") {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY_MESSAGES);
-      const allMsgs: LeadMessage[] = raw ? JSON.parse(raw) : INITIAL_MOCK_MESSAGES;
-      allMsgs.push(newMsg);
-      localStorage.setItem(STORAGE_KEY_MESSAGES, JSON.stringify(allMsgs));
-    } catch (e) {
-      console.error("Failed to save message", e);
-    }
+  if (withAuth) {
+    const token = getAdminToken();
+    if (token) headers["Authorization"] = `Bearer ${token}`;
   }
 
-  return newMsg;
-}
+  const response = await fetch(path, { ...options, headers });
 
-export function createLeadFromForm(data: RequestFormData): Lead {
-  const refId = generateRefId();
-  const newLead: Lead = {
-    id: `lead-${Date.now()}`,
-    ref_id: refId,
-    full_name: data.full_name,
-    whatsapp_number: data.whatsapp_number,
-    email: data.email || "",
-    city: data.city,
-    business_name: data.business_name,
-    business_type: data.business_type,
-    has_website: data.has_website,
-    existing_website_url: data.existing_website_url || "",
-    needs: data.needs || [],
-    budget_range: data.budget_range,
-    preferred_call_time: data.preferred_call_time,
-    customer_message: data.customer_message || "",
-    status: "New",
-    stage: "Received",
-    assigned_to: "Unassigned",
-    internal_notes: "New request received via 3-step lead intake form.",
-    is_spam: false,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  };
-
-  const currentLeads = getStoredLeads();
-  const updated = [newLead, ...currentLeads];
-  saveStoredLeads(updated);
-
-  // Add initial activity
-  saveActivity({
-    lead_id: newLead.id,
-    action_title: "Request Submitted",
-    action_detail: `3-step enquiry received from ${data.full_name} (${data.city}) for ${data.business_name}`,
-    actor_name: "Customer",
-  });
-
-  return newLead;
-}
-
-export function updateLeadStatus(id: string, newStatus: LeadStatus, newStage?: ProjectStage): Lead[] {
-  const leads = getStoredLeads();
-  const updated = leads.map(lead => {
-    if (lead.id === id) {
-      let stage = newStage || lead.stage;
-      // Auto-map status to project stage if stage not specified
-      if (!newStage) {
-        if (newStatus === "New") stage = "Received";
-        if (newStatus === "Under Review") stage = "Under Review";
-        if (newStatus === "Call Scheduled") stage = "Call Scheduled";
-        if (newStatus === "Proposal Sent") stage = "Proposal Sent";
-        if (newStatus === "Won") stage = "In Progress";
-        if (newStatus === "Lost") stage = "Received";
-      }
-
-      const updatedLead = {
-        ...lead,
-        status: newStatus,
-        stage: stage,
-        updated_at: new Date().toISOString(),
-      };
-
-      saveActivity({
-        lead_id: lead.id,
-        action_title: `Status updated to ${newStatus}`,
-        action_detail: `Pipeline stage set to ${stage}`,
-        actor_name: "Admin",
-      });
-
-      return updatedLead;
-    }
-    return lead;
-  });
-
-  saveStoredLeads(updated);
-  return updated;
-}
-
-export function updateLeadDetails(id: string, updates: Partial<Lead>): Lead[] {
-  const leads = getStoredLeads();
-  const updated = leads.map(lead => {
-    if (lead.id === id) {
-      const updatedLead = {
-        ...lead,
-        ...updates,
-        updated_at: new Date().toISOString(),
-      };
-
-      saveActivity({
-        lead_id: lead.id,
-        action_title: "Lead details updated",
-        action_detail: updates.internal_notes ? "Internal notes updated" : "Contact / Business details updated",
-        actor_name: "Admin",
-      });
-
-      return updatedLead;
-    }
-    return lead;
-  });
-
-  saveStoredLeads(updated);
-  return updated;
-}
-
-export function saveActivity(act: Omit<LeadActivity, "id" | "created_at">) {
-  if (typeof window === "undefined") return;
+  let payload: { success?: boolean; message?: string } & Record<string, unknown>;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY_ACTIVITIES);
-    const activities: LeadActivity[] = raw ? JSON.parse(raw) : INITIAL_MOCK_ACTIVITIES;
-    activities.unshift({
-      ...act,
-      id: `act-${Date.now()}`,
-      created_at: new Date().toISOString(),
-    });
-    localStorage.setItem(STORAGE_KEY_ACTIVITIES, JSON.stringify(activities));
-  } catch (e) {
-    console.error("Failed to save activity", e);
-  }
-}
-
-export function getLeadActivities(leadId: string): LeadActivity[] {
-  if (typeof window === "undefined") return INITIAL_MOCK_ACTIVITIES.filter(a => a.lead_id === leadId);
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY_ACTIVITIES);
-    const all: LeadActivity[] = raw ? JSON.parse(raw) : INITIAL_MOCK_ACTIVITIES;
-    return all.filter(a => a.lead_id === leadId);
+    payload = await response.json();
   } catch {
-    return INITIAL_MOCK_ACTIVITIES.filter(a => a.lead_id === leadId);
+    throw new ApiError(`Request failed (${response.status})`, response.status);
   }
+
+  if (!response.ok) {
+    // An expired/invalid admin token means the dashboard session is over.
+    if (response.status === 401 && withAuth) {
+      setAdminToken(null);
+    }
+    throw new ApiError(payload.message || `Request failed (${response.status})`, response.status);
+  }
+
+  return payload as T;
+}
+
+// ---------------------------------------------------------------------------
+// Admin auth
+// ---------------------------------------------------------------------------
+
+export async function adminLogin(username: string, password: string): Promise<{ token: string; name: string }> {
+  const payload = await apiFetch<{ token: string; name: string }>("/api/admin/login", {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+  });
+
+  setAdminToken(payload.token);
+  return payload;
+}
+
+export function adminLogout() {
+  // Tokens are stateless; dropping the token locally ends the session.
+  setAdminToken(null);
+}
+
+// ---------------------------------------------------------------------------
+// Leads (admin)
+// ---------------------------------------------------------------------------
+
+export async function getStoredLeads(): Promise<Lead[]> {
+  const payload = await apiFetch<{ leads: Lead[] }>("/api/leads", {}, true);
+  return payload.leads || [];
+}
+
+export async function createLeadFromForm(data: RequestFormData): Promise<Lead> {
+  const payload = await apiFetch<{ lead: Lead }>("/api/leads", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+
+  return payload.lead;
+}
+
+
+export async function updateLeadStatus(id: string, newStatus: LeadStatus, newStage?: ProjectStage): Promise<Lead[]> {
+  await apiFetch<{ lead: Lead }>(`/api/leads/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status: newStatus, ...(newStage ? { stage: newStage } : {}) }),
+  }, true);
+
+  // Return the fresh list so callers can replace their state in one step.
+  return getStoredLeads();
+}
+
+export async function updateLeadDetails(id: string, updates: Partial<Lead>): Promise<Lead[]> {
+  await apiFetch<{ lead: Lead }>(`/api/leads/${encodeURIComponent(id)}`, {
+    method: "PATCH",
+    body: JSON.stringify(updates),
+  }, true);
+
+  return getStoredLeads();
+}
+
+// ---------------------------------------------------------------------------
+// Customer portal (public, lookup via ref ID / WhatsApp number)
+// ---------------------------------------------------------------------------
+
+export async function lookupLead(query: string): Promise<Lead | null> {
+  try {
+    const payload = await apiFetch<{ lead: Lead }>(
+      `/api/leads/lookup?q=${encodeURIComponent(query)}`
+    );
+    return payload.lead || null;
+  } catch (e) {
+    if (e instanceof ApiError && e.status === 404) return null;
+    throw e;
+  }
+}
+
+export async function updatePortalLeadNotes(id: string, refId: string, customerMessage: string): Promise<Lead> {
+  const payload = await apiFetch<{ lead: Lead }>("/api/portal/lead", {
+    method: "PATCH",
+    body: JSON.stringify({ id, ref_id: refId, customer_message: customerMessage }),
+  });
+
+  return payload.lead;
+}
+
+// ---------------------------------------------------------------------------
+// Messages
+// ---------------------------------------------------------------------------
+
+export async function getStoredMessages(leadId: string): Promise<LeadMessage[]> {
+  const payload = await apiFetch<{ messages: LeadMessage[] }>(
+    `/api/leads/${encodeURIComponent(leadId)}/messages`
+  );
+  return payload.messages || [];
+}
+
+export async function saveNewMessage(msg: {
+  lead_id: string;
+  sender_role: "admin" | "customer";
+  sender_name: string;
+  message_text: string;
+  is_read?: boolean;
+}): Promise<LeadMessage> {
+  const payload = await apiFetch<{ message: LeadMessage }>(
+    `/api/leads/${encodeURIComponent(msg.lead_id)}/messages`,
+    {
+      method: "POST",
+      body: JSON.stringify({ sender_name: msg.sender_name, message_text: msg.message_text }),
+    }
+  );
+
+  return payload.message;
 }
