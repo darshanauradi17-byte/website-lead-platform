@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Lead, LeadMessage, LeadFile, ProjectStage } from "@/lib/types";
-import { getStoredLeads, getStoredMessages, saveNewMessage, updateLeadDetails } from "@/lib/lead-store";
+import { lookupLead, getStoredMessages, saveNewMessage, updatePortalLeadNotes } from "@/lib/lead-store";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { GradientButton } from "@/components/ui/gradient-button";
@@ -22,6 +22,7 @@ export function CustomerPortal() {
   const [isEditingNotes, setIsEditingNotes] = useState<boolean>(false);
   const [editNotesText, setEditNotesText] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
+  const [isLookingUp, setIsLookingUp] = useState<boolean>(false);
 
   useEffect(() => {
     if (refParam) {
@@ -29,7 +30,7 @@ export function CustomerPortal() {
     }
   }, [refParam]);
 
-  const handleLookup = (searchId?: string) => {
+  const handleLookup = async (searchId?: string) => {
     const query = (searchId || inputRef).trim().toUpperCase();
     if (!query) {
       setLoginError("Please enter your Reference ID or WhatsApp number.");
@@ -37,41 +38,58 @@ export function CustomerPortal() {
     }
 
     setLoginError("");
-    const leads = getStoredLeads();
-    const found = leads.find(
-      (l) => l.ref_id.toUpperCase() === query || l.whatsapp_number.replace(/\D/g, "").includes(query.replace(/\D/g, ""))
-    );
-
-    if (found) {
-      setCurrentLead(found);
-      setMessages(getStoredMessages(found.id));
-      setEditNotesText(found.customer_message || "");
-    } else {
-      setLoginError(`No project request found for "${query}". Try APW-KIRANA, APW-SALON, or check your WhatsApp number.`);
+    setIsLookingUp(true);
+    try {
+      const found = await lookupLead(query);
+      if (found) {
+        setCurrentLead(found);
+        setMessages(await getStoredMessages(found.id));
+        setEditNotesText(found.customer_message || "");
+      } else {
+        setLoginError(`No project request found for "${query}". Try APW-KIRANA, APW-SALON, or check your WhatsApp number.`);
+      }
+    } catch (error) {
+      console.error("Lookup failed", error);
+      setLoginError(error instanceof Error ? error.message : "Lookup failed. Please try again.");
+    } finally {
+      setIsLookingUp(false);
     }
   };
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMessageText.trim() || !currentLead) return;
 
-    const saved = saveNewMessage({
-      lead_id: currentLead.id,
-      sender_role: "customer",
-      sender_name: currentLead.full_name,
-      message_text: newMessageText.trim(),
-      is_read: true,
-    });
-
-    setMessages((prev) => [...prev, saved]);
+    const messageText = newMessageText.trim();
     setNewMessageText("");
+
+    try {
+      const saved = await saveNewMessage({
+        lead_id: currentLead.id,
+        sender_role: "customer",
+        sender_name: currentLead.full_name,
+        message_text: messageText,
+        is_read: true,
+      });
+
+      setMessages((prev) => [...prev, saved]);
+    } catch (error) {
+      console.error("Message send failed", error);
+      // Restore the typed text so nothing is lost on failure.
+      setNewMessageText(messageText);
+    }
   };
 
-  const handleSaveNotes = () => {
+  const handleSaveNotes = async () => {
     if (!currentLead) return;
-    updateLeadDetails(currentLead.id, { customer_message: editNotesText });
-    setCurrentLead((prev) => (prev ? { ...prev, customer_message: editNotesText } : null));
-    setIsEditingNotes(false);
+
+    try {
+      const updated = await updatePortalLeadNotes(currentLead.id, currentLead.ref_id, editNotesText);
+      setCurrentLead(updated);
+      setIsEditingNotes(false);
+    } catch (error) {
+      console.error("Notes update failed", error);
+    }
   };
 
   const projectStages: { stage: ProjectStage; label: string; desc: string }[] = [
@@ -139,8 +157,8 @@ export function CustomerPortal() {
             />
           </div>
 
-          <Button type="submit" size="md" className="w-full justify-center font-bold">
-            Lookup My Project →
+          <Button type="submit" size="md" className="w-full justify-center font-bold" disabled={isLookingUp}>
+            {isLookingUp ? "Looking up..." : "Lookup My Project →"}
           </Button>
         </form>
 

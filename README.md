@@ -9,51 +9,87 @@ A small working prototype of your idea:
 
 ## What's inside
 
+There are two apps in this folder:
+
+**Next.js web app (`src/`) — the current frontend, connected to Supabase**
+
 ```
-website-lead-platform/
-├── server.js              Backend (Express) — handles form submissions + dashboard API
-├── package.json
-├── .env.example            Copy to .env and set your own login/port
-├── data/submissions.json   Where leads are stored (simple JSON file, no database needed)
-└── public/
-    ├── index.html          Landing page + request form
-    ├── dashboard.html       Owner login + dashboard
-    ├── css/style.css
-    ├── css/dashboard.css
-    ├── js/main.js           Form submit logic
-    └── js/dashboard.js      Dashboard logic (login, table, status updates)
+src/
+├── app/
+│   ├── page.tsx, services/, portfolio/, get-website/, contact/   Public pages
+│   ├── admin/login/        Owner dashboard (AdminDashboard)
+│   ├── portal/login/       Customer tracking portal (CustomerPortal)
+│   └── api/                Backend routes the frontend calls
+│       ├── admin/login/        POST — admin sign-in (issues HMAC token)
+│       ├── leads/              POST (public form) / GET (admin list)
+│       ├── leads/[id]/         PATCH (admin update status/notes/fields)
+│       ├── leads/lookup/       GET — public ref-ID/WhatsApp lookup
+│       ├── leads/[id]/messages/ GET+POST — portal chat
+│       └── portal/lead/        PATCH — customer edits own notes
+├── lib/
+│   ├── lead-store.ts       Frontend data layer (calls the API routes)
+│   ├── admin-auth.ts       Server-side admin token sign/verify
+│   ├── api-helpers.ts      Shared validation / sanitizing / rate limiting
+│   └── supabase/server.ts  Server-only Supabase client (service role)
+supabase/schema.sql         Database schema, RLS policies & seed data
 ```
 
-## Running it locally
+**Legacy Express app (`server.js` + `public/`) — the original JSON-file prototype, still runnable**
 
-You'll need [Node.js](https://nodejs.org) 18 or newer installed.
+```
+server.js              Backend (Express) — handles form submissions + dashboard API
+data/submissions.json   Where leads are stored (simple JSON file, no database needed)
+public/                 Original landing page, portfolio & dashboard (vanilla HTML/JS)
+```
+
+## Running the Next.js app (recommended)
+
+You'll need [Node.js](https://nodejs.org) 18 or newer and a [Supabase](https://supabase.com) project.
+
+1. Create a Supabase project, open the SQL editor and run `supabase/schema.sql` (creates tables, RLS policies and seed leads like APW-KIRANA).
+2. Configure environment variables:
 
 ```bash
 cd website-lead-platform
+cp .env.example .env.local   # then fill in your Supabase keys + admin password
+```
+
+3. Install and run:
+
+```bash
+npm install
+npm run dev:web       # Next.js dev server on http://localhost:3000
+# npm run build:web && npm run start:web   for production
+```
+
+Then open:
+- `http://localhost:3000` — public site; submit a request at `/get-website`
+- `http://localhost:3000/admin/login` — owner dashboard (ADMIN_USER / ADMIN_PASS from `.env.local`)
+- `http://localhost:3000/portal/login` — customer tracking by ref ID (try `APW-KIRANA`)
+
+Every lead, status change, and portal message is stored in Supabase, so the dashboard and portal always show the real server state — on any device.
+
+## Running the legacy Express app
+
+```bash
 cp .env.example .env       # then edit .env and set your own ADMIN_USER / ADMIN_PASS
 npm install
 npm start
 ```
 
-Then open:
 - `http://localhost:3000` — the public landing page and form
-- `http://localhost:3000/dashboard.html` — your owner dashboard (log in with the username/password from `.env`)
+- `http://localhost:3000/dashboard.html` — the owner dashboard
 
-Submit a test request on the landing page, then check the dashboard — it should appear immediately.
+## How data is stored (Next.js app)
 
-## How data is stored
-
-Every submitted form is appended to `data/submissions.json` as one entry with a unique id, timestamp, and status. This is fine for getting started and for a handful of requests a day. If you start getting a lot of traffic, swap this file for a real database (e.g. SQLite, PostgreSQL, or MongoDB) — the `readSubmissions()` / `writeSubmissions()` functions in `server.js` are the only place you'd need to change.
+Leads, messages and the activity log live in Supabase tables (`public.leads`, `public.lead_messages`, `public.lead_activity`). The frontend never talks to Supabase directly — it calls the Next.js API routes, which use the **service role key on the server only** and validate every input. Public lookups return sanitized fields so owner-only notes never reach the customer portal.
 
 ## Security notes before you go live
 
-This is a working MVP, not a production-hardened app. Before you put it on the internet with real customer data, you should:
-
-- Set a strong, unique `ADMIN_PASS` in `.env` (never commit `.env` to git).
-- Serve the site over HTTPS (most hosts like Render, Railway, or a VPS with Caddy/Nginx do this for you).
-- Replace the in-memory login tokens with a proper session library (e.g. `express-session`) if you expect the server to restart often or want tokens to survive a restart.
-- Add basic rate-limiting to `/api/submit` so the form can't be spammed.
-- Consider adding a simple CAPTCHA (e.g. Google reCAPTCHA) to the request form.
+- Set a strong `ADMIN_PASS` and a unique `ADMIN_SESSION_SECRET` in `.env.local` (never commit `.env`).
+- `SUPABASE_SERVICE_ROLE_KEY` bypasses Row Level Security — keep it server-side only.
+- Serve the site over HTTPS (Vercel, Render, or a VPS with Caddy/Nginx).
+- Login and form submission have basic in-memory rate limiting; add a CAPTCHA if spam becomes a problem.
 
 ## Deploying
 

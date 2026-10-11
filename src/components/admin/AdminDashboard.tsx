@@ -17,6 +17,7 @@ export function AdminDashboard() {
   const [authError, setAuthError] = useState<string>("");
 
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [viewMode, setViewMode] = useState<"table" | "kanban">("table");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -27,61 +28,87 @@ export function AdminDashboard() {
   const [realtimeToast, setRealtimeToast] = useState<string | null>(null);
 
   useEffect(() => {
-    // Check if logged in in session
-    const auth = sessionStorage.getItem("apnaweb_admin_auth");
-    if (auth === "true") {
+    // Existing admin token means the session with the backend is still valid.
+    if (getAdminToken()) {
       setIsAuthenticated(true);
       loadLeads();
     }
   }, []);
 
-  const loadLeads = () => {
-    const data = getStoredLeads();
-    setLeads(data);
+  const loadLeads = async () => {
+    setIsLoading(true);
+    try {
+      const data = await getStoredLeads();
+      setLeads(data);
+    } catch (error) {
+      console.error("Failed to load leads", error);
+      setAuthError(error instanceof Error ? error.message : "Could not load leads from the server.");
+      // A 401 clears the token inside lead-store; drop back to the login screen.
+      if (!getAdminToken()) {
+        setIsAuthenticated(false);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (adminUser === "admin" && adminPass === "admin123") {
-      sessionStorage.setItem("apnaweb_admin_auth", "true");
+    setAuthError("");
+    try {
+      await adminLogin(adminUser, adminPass);
       setIsAuthenticated(true);
-      setAuthError("");
-      loadLeads();
-    } else {
-      setAuthError("Invalid username or password. (Default: admin / admin123)");
+      await loadLeads();
+    } catch (error) {
+      setAuthError(error instanceof Error ? error.message : "Invalid username or password.");
     }
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("apnaweb_admin_auth");
+    adminLogout();
     setIsAuthenticated(false);
+    setLeads([]);
   };
 
-  const handleStatusChange = (id: string, newStatus: LeadStatus) => {
-    const updated = updateLeadStatus(id, newStatus);
-    setLeads(updated);
-    if (selectedLead && selectedLead.id === id) {
-      setSelectedLead(updated.find((l) => l.id === id) || null);
+  const handleStatusChange = async (id: string, newStatus: LeadStatus) => {
+    try {
+      const updated = await updateLeadStatus(id, newStatus);
+      setLeads(updated);
+      if (selectedLead && selectedLead.id === id) {
+        setSelectedLead(updated.find((l) => l.id === id) || null);
+      }
+
+      // Trigger toast
+      setRealtimeToast(`Updated ${selectedLead?.business_name || "Lead"} to ${newStatus}`);
+      setTimeout(() => setRealtimeToast(null), 3000);
+    } catch (error) {
+      console.error("Status update failed", error);
+      setRealtimeToast(error instanceof Error ? error.message : "Status update failed.");
+      setTimeout(() => setRealtimeToast(null), 3000);
     }
-
-    // Trigger toast
-    setRealtimeToast(`Updated ${selectedLead?.business_name || "Lead"} to ${newStatus}`);
-    setTimeout(() => setRealtimeToast(null), 3000);
   };
 
-  const handleAssignTeam = (id: string, person: string) => {
-    const updated = updateLeadDetails(id, { assigned_to: person });
-    setLeads(updated);
-    if (selectedLead && selectedLead.id === id) {
-      setSelectedLead(updated.find((l) => l.id === id) || null);
+  const handleAssignTeam = async (id: string, person: string) => {
+    try {
+      const updated = await updateLeadDetails(id, { assigned_to: person });
+      setLeads(updated);
+      if (selectedLead && selectedLead.id === id) {
+        setSelectedLead(updated.find((l) => l.id === id) || null);
+      }
+    } catch (error) {
+      console.error("Assignment update failed", error);
     }
   };
 
-  const handleSaveNotes = (id: string, notes: string) => {
-    const updated = updateLeadDetails(id, { internal_notes: notes });
-    setLeads(updated);
-    if (selectedLead && selectedLead.id === id) {
-      setSelectedLead(updated.find((l) => l.id === id) || null);
+  const handleSaveNotes = async (id: string, notes: string) => {
+    try {
+      const updated = await updateLeadDetails(id, { internal_notes: notes });
+      setLeads(updated);
+      if (selectedLead && selectedLead.id === id) {
+        setSelectedLead(updated.find((l) => l.id === id) || null);
+      }
+    } catch (error) {
+      console.error("Notes update failed", error);
     }
   };
 
@@ -167,7 +194,7 @@ export function AdminDashboard() {
         </form>
 
         <p className="text-[11px] text-center text-warm-400">
-          Default Credentials: <code className="bg-warm-100 px-1 py-0.5 rounded text-warm-800">admin</code> / <code className="bg-warm-100 px-1 py-0.5 rounded text-warm-800">admin123</code>
+          Credentials are set in your server <code className="bg-warm-100 px-1 py-0.5 rounded text-warm-800">.env.local</code> file (ADMIN_USER / ADMIN_PASS).
         </p>
       </div>
     );
@@ -206,9 +233,9 @@ export function AdminDashboard() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="secondary" size="sm" onClick={loadLeads}>
-            <RefreshCw className="w-3.5 h-3.5 mr-1" />
-            <span>Refresh</span>
+          <Button variant="secondary" size="sm" onClick={loadLeads} disabled={isLoading}>
+            <RefreshCw className={`w-3.5 h-3.5 mr-1 ${isLoading ? "animate-spin" : ""}`} />
+            <span>{isLoading ? "Syncing..." : "Refresh"}</span>
           </Button>
           <Button variant="secondary" size="sm" onClick={() => exportLeadsToCsv(leads)}>
             <FileSpreadsheet className="w-3.5 h-3.5 mr-1" />

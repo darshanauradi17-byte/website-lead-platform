@@ -64,6 +64,9 @@ export async function POST(request: NextRequest) {
     return apiError(errors.join(" "), 400);
   }
 
+  // Guarded by the validation above (phone is non-null here).
+  const phoneDigits = phone as string;
+
   const supabase = getSupabaseAdmin();
   const userAgent = (request.headers.get("user-agent") || "").slice(0, 500);
 
@@ -77,7 +80,7 @@ export async function POST(request: NextRequest) {
       .insert({
         ref_id: generateRefId(),
         full_name,
-        whatsapp_number: `+91 ${phone.slice(0, 5)} ${phone.slice(5)}`,
+        whatsapp_number: `+91 ${phoneDigits.slice(0, 5)} ${phoneDigits.slice(5)}`,
         email: String(body.email || "").trim() || null,
         city,
         business_name,
