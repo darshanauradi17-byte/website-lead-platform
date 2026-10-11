@@ -1,9 +1,9 @@
 # Implementation Roadmap & Task Tracker
 
 **Project:** ApnaWeb Lead Platform  
-**Roadmap Version:** 2.0.0  
+**Roadmap Version:** 2.1.0  
 **Repository:** [github.com/darshanauradi17-byte/website-lead-platform](https://github.com/darshanauradi17-byte/website-lead-platform)  
-**Tracking Status:** Production Ready / Deployed  
+**Tracking Status:** Production Ready (Pre-Launch Domain Gate)  
 
 ---
 
@@ -14,10 +14,11 @@
 | **P0: Core Platform Architecture** | Highest | ✅ Completed | Dual runtime setup (Next.js 14 + Standalone Express) |
 | **P1: Lead Capture & Tracking UI** | High | ✅ Completed | Single-flow intake form and zero-login Request ID tracking |
 | **P2: Owner Management Dashboard** | High | ✅ Completed | Authenticated lead triage workspace with status progression |
-| **P3: Elena Voss Portfolio Replica** | High | ✅ Completed | Luxury obsidian portfolio showcase with live preview switcher |
-| **P4: Security & Data Hardening** | Medium | ✅ Completed | Input validation, XSS prevention, and secret encapsulation |
-| **P5: Git & Deployment Sync** | Medium | ✅ Completed | Clean Git repository, .gitignore, and GitHub synchronization |
-| **P6: Post-Launch Enhancements** | Low | 📋 Backlog | WhatsApp automated alerts, custom domain automation |
+| **P3: Showcase Portfolio** | High | ✅ Completed | Luxury obsidian portfolio showcase with real local case studies |
+| **P4: Anti-Vibe-Coding Compliance** | High | ✅ Completed | Purged purple gradients, pill buttons, fake metrics, and AI tags |
+| **P5: Favicon & Brand Assets** | High | ✅ Completed | SVG favicon generated and linked across all pages |
+| **P6: Pre-Launch Gate (Domain)** | High | ⏳ Pending | Do NOT launch until custom domain is connected |
+| **P7: Git & Deployment Sync** | Medium | ✅ Completed | Clean Git repository, .gitignore, and GitHub synchronization |
 
 ---
 
@@ -29,10 +30,8 @@
 - [x] **Deterministic Request ID Sequence**
   - Generator starts at `#1000` and increments sequentially (`1000`, `1001`, `1002`, ...).
   - Synchronous file persistence safeguard in `data/submissions.json`.
-- [x] **Standardized Routing**
-  - `/` — Core customer landing and request intake.
-  - `/portfolio.html` (and `/portfolio`) — Creative showcase.
-  - `/dashboard.html` (and `/dashboard`) — Authenticated agency management dashboard.
+- [x] **Permanent Port 3000 Enforcement**
+  - Locked `server.js` to Port 3000 with automatic process-clearing logic.
 
 ---
 
@@ -47,12 +46,11 @@
 - [x] **Zero-Login Customer Tracking Portal**
   - Direct 4-digit Request ID lookup without requiring customer passwords.
   - Interactive 4-stage visual progress timeline:
-    `New` ➔ `Contacted` ➔ `In Progress` ➔ `Delivered`
-  - Real-time server synchronization reflecting latest progress.
+    `New` -> `Contacted` -> `In Progress` -> `Delivered`
 
 ---
 
-## 4. Priority 2 — Owner Dashboard & Workflow Management
+## 4. Priority 2 — Owner Dashboard & Lead Management
 
 - [x] **Secured Access & Session Control**
   - Protected admin login gateway with token authorization.
@@ -62,58 +60,43 @@
   - Status filter buttons (`All`, `New`, `Contacted`, `In Progress`, `Delivered`).
   - One-click customer actions: Instant WhatsApp message trigger and telephone dialer.
   - Safe deletion workflow with confirmation modal.
-- [x] **Responsive Parity**
-  - Full desktop table view paired with mobile-optimized lead cards.
 
 ---
 
-## 5. Priority 3 — Luxury Elena Voss Portfolio Replica
+## 5. Priority 3 — Anti-Vibe-Coding Refactor (Strict Compliance)
 
-- [x] **Elena Voss Visual Aesthetic (`public/portfolio.html`)**
-  - Deep obsidian canvas (`#070707`), radiant ambient glow (`#F0640D` to `#B01205`), and editorial typography (*Host Grotesk* + *Playfair Display*).
-  - Sticky frosted navigation bar with smooth anchor links.
-- [x] **Founder Photo Spotlight**
-  - Built-in photo container (`#hero-owner-photo`) ready for founder photo insertion.
-- [x] **Interactive Live Preview Switcher**
-  - Dynamic preview stage displaying realistic Indian business case studies:
-    - *Apex Pharmacy & Surgical Store* (e-commerce & prescription ordering)
-    - *Royal Heritage Unisex Salon* (online appointment booking)
-    - *Mahalaxmi Supermarket / Kirana* (daily essentials catalogue)
-    - *Artisan Brew Café & Bistro* (digital QR menu)
-    - *Pulse Multi-Speciality Clinic* (doctor appointment system)
-    - *IronForge Fitness Gym* (membership management)
-- [x] **Founder Social Integration**
-  - Direct Instagram profile link ([@darshan_auradi_06](https://www.instagram.com/darshan_auradi_06/)).
-
----
-
-## 6. Priority 4 — Security & Production Hardening
-
-- [x] **Secret Encapsulation**
-  - Configuration extracted to `.env.example` and `.env.local`.
-  - Database service-role keys encapsulated strictly in server-side handlers.
-- [x] **Data Privacy & Public Route Sanitization**
-  - Public tracking endpoints scrub internal agency notes, operator IDs, and private flags.
-  - XSS defense through DOM `textContent` escaping on dynamic table rendering.
-- [x] **Accessible Motion Physics**
-  - Automatic detection and respect for `prefers-reduced-motion: reduce`.
-  - WebGL fallback to 2D canvas for low-power mobile devices.
+- [x] **Zero Purple Gradients**
+  - Purged all purple, violet, and magenta gradients across all stylesheets (`dashboard.css`, `gradient-button.css`, `style.css`).
+- [x] **Zero Pill-Shaped Buttons**
+  - Banned `border-radius: 9999px`. Enforced crisp rectangular corners with subtle `6px`–`8px` radii.
+- [x] **Zero Fake Reviews & Fake Metrics**
+  - Removed fake AWWARDS, FWA, and Webby badges. Replaced with authentic build standards.
+- [x] **Zero Vague Hero Copy**
+  - Replaced generic AI headlines with direct, plain-spoken Indian business value propositions.
+- [x] **Zero Emoji Icons**
+  - Eradicated all emojis from headers, cards, and buttons. Using clean Lucide/SVG vectors.
+- [x] **Zero Em Dashes (`—`)**
+  - Replaced all em dashes with standard hyphens `-` and colons `:`.
+- [x] **Zero Cursor Animations & Over-The-Top Scroll Effects**
+  - Native cursor interaction only. Disabled custom trailing cursors.
+- [x] **Zero Fake Custom Counters**
+  - Removed fake stat tickers. Counters reflect only live, real database submissions.
 
 ---
 
-## 7. Priority 5 — Version Control & Repository Sync
+## 6. Priority 4 — Brand Assets & Launch Gate
 
-- [x] **Git Repository Initialization**
-  - Standardized root `.gitignore` excluding `node_modules/`, `.next/`, and environment secrets.
-  - Default branch set to `main`.
-- [x] **GitHub Remote Synchronization**
-  - Synced to remote: [github.com/darshanauradi17-byte/website-lead-platform](https://github.com/darshanauradi17-byte/website-lead-platform).
+- [x] **Official Favicon Active**
+  - Created `public/favicon.svg` and linked via `<link rel="icon">` in `index.html`, `portfolio.html`, and `dashboard.html`.
+- [x] **Purge AI / Template Badges**
+  - Eradicated all "Made with AI", 21st.dev, and template strings from code comments, titles, and metadata.
+- [ ] **Custom Domain Connection (Strict Launch Gate)**
+  - Do NOT deploy/launch to public traffic until verified custom domain (e.g. `apnaweb.in`) is connected.
 
 ---
 
-## 8. Priority 6 — Future Considerations & Backlog
+## 7. Priority 5 — Future Backlog (Post-Launch)
 
-- [ ] **Automated WhatsApp Business Notification:** Automatic WhatsApp alert sent to agency phone upon new lead arrival.
+- [ ] **Automated WhatsApp Business Notification:** Instant WhatsApp ping on incoming leads.
 - [ ] **Automated Client Invoicing:** PDF proposal and invoice generation directly from the owner dashboard.
-- [ ] **Custom Domain Setup Guide:** Interactive DNS step-by-step assistant for clients launching their delivered websites.
 - [ ] **Founder Photo Asset Insertion:** Insert high-resolution founder photo into `public/portfolio.html`.

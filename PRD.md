@@ -142,19 +142,28 @@ Many traditional business owners hesitate to hire digital agencies due to techni
 
 ---
 
-## 7. Non-Goals & Out-of-Scope Items
+## 7. Non-Goals & Strict Exclusions
 
-To preserve simplicity and focus on high conversion, the following are strictly excluded from current scope:
-* ❌ Mandatory customer account creation or password credentials for lead submission.
-* ❌ In-browser automated payment gateways (payments are finalized post-consultation via UPI/invoice).
-* ❌ Heavy, blocking WebGL animations that degrade performance on budget mobile devices.
-* ❌ Complex multi-step wizard forms that lower submission conversion rates.
+To preserve authenticity, simplicity, and high conversion, the following are strictly excluded:
+* **Zero Vibe-Coding Tropes:** NO purple gradients, NO pill-shaped buttons (`9999px`), NO fake reviews, NO fake awards/metrics, NO vague hero copy, NO emoji icons, NO em dashes, NO cursor animations, NO AI slop photos, and NO fake counters.
+* **No Mandatory Accounts:** No customer account creation or password credentials for lead submission.
+* **No Automated In-Browser Checkouts:** Payments are finalized post-consultation via UPI/invoice.
+* **No Heavy Multi-Step Wizards:** Single-flow form keeps conversion rates high.
 
 ---
 
-## 8. Success Metrics & Key Performance Indicators (KPIs)
+## 8. Production Launch Gate Invariants
+
+The platform **MUST NOT LAUNCH** to production until all three conditions are satisfied:
+1. **Custom Domain Connected:** DNS verified and routing from a live custom domain (e.g. `apnaweb.in`).
+2. **Official Favicon Active:** Proper SVG/ICO favicon (`favicon.svg`) linked on all pages.
+3. **Zero AI / Template Tags:** All "Made with AI", 21st.dev, or template tags completely eradicated.
+
+---
+
+## 9. Success Metrics & Key Performance Indicators (KPIs)
 
 1. **Submission Completion Rate:** > 80% form completion rate for visitors opening the request section.
-2. **Speed to Contact (SLA):** Agency response within 24–48 hours of initial lead generation.
+2. **Speed to Contact (SLA):** Agency response within 24 to 48 hours of initial lead generation.
 3. **Tracking Accessibility:** 100% of customers able to view real-time build status using their 4-digit ID.
 4. **Performance & Lighthouse Score:** > 90 on Desktop and > 85 on Mobile for fast load times over 4G connections.

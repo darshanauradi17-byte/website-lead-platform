@@ -138,3 +138,23 @@ website-lead-platform/
 └── supabase/
     └── schema.sql           # Production PostgreSQL schema definitions
 ```
+
+---
+
+## 8. Anti-Vibe-Coding Invariants & Launch Gate
+
+1. **Strictly Prohibited:**
+   - Purple, violet, or magenta gradients anywhere.
+   - Pill-shaped buttons (`border-radius: 9999px`). All buttons are rectangular with subtle 6px-8px radius.
+   - Fake reviews, star ratings, or fabricated awards (AWWARDS, FWA).
+   - Vague hero copy (only direct, grounded Indian local business copy).
+   - Emojis in UI or headings (clean SVGs only).
+   - Em dashes (`—`) (only standard hyphens `-` or colons `:`).
+   - Custom cursor animations or trailing dots.
+   - Fake stat tickers / counters.
+   - AI slop photos or copy.
+2. **Launch Gate Requirements:**
+   - Must NOT launch to production until:
+     1. Verified custom domain is connected.
+     2. Official SVG favicon (`public/favicon.svg`) is active.
+     3. All "Made with AI", 21st.dev, or template tags are completely purged.

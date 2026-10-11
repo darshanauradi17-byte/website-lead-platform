@@ -43,9 +43,9 @@
   --rose-subtle: rgba(244, 63, 94, 0.12);
   --rose-border: rgba(244, 63, 94, 0.28);
 
-  --purple: #8b5cf6;
-  --purple-subtle: rgba(139, 92, 246, 0.12);
-  --purple-border: rgba(139, 92, 246, 0.28);
+  --sky: #0284c7;
+  --sky-subtle: rgba(2, 132, 199, 0.14);
+  --sky-border: rgba(2, 132, 199, 0.32);
 
   /* Realistic Shadows & Physical Elevation */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
@@ -1093,8 +1093,8 @@ a {
 }
 
 .pulse-dot.in-progress {
-  background: var(--purple);
-  box-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+  background: var(--sky);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
 }
 
 .pulse-dot.completed {
@@ -1416,9 +1416,9 @@ a {
 }
 
 .status-pill.status-in-progress {
-  background: var(--purple-subtle);
-  border: 1px solid var(--purple-border);
-  color: #c084fc;
+  background: var(--sky-subtle);
+  border: 1px solid var(--sky-border);
+  color: #38bdf8;
 }
 
 .status-pill.status-delivered {

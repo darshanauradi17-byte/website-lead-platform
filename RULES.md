@@ -1,7 +1,7 @@
 # Project Governance & Engineering Rules
 
 **Project:** ApnaWeb Lead Platform  
-**Document Version:** 2.0.0  
+**Document Version:** 2.1.0  
 **Scope:** Universal Standards for Code, Architecture, UI/UX, and Operations  
 
 ---
@@ -9,7 +9,7 @@
 ## 1. Product & Architecture Principles
 
 1. **Practical Utility Over Complexity:** Build features that serve local businesses and generate revenue. Do not engineer speculative abstractions or unnecessary microservices.
-2. **Functionality Before Decoration:** Every interactive element, animation, or 3D visual must support user comprehension and conversion. Aesthetics must never impede usability.
+2. **Functionality Before Decoration:** Every interactive element, animation, or visual must support user comprehension and conversion. Aesthetics must never impede usability.
 3. **Dual Runtime Integrity:**
    - Any modifications to the Next.js production stack must not break the standalone Express prototype runtime (`server.js` + `public/`).
    - Standard routes (`/`, `/portfolio`, `/dashboard`, `/api/submit`, `/api/leads`) must remain backwards compatible.
@@ -80,23 +80,44 @@ The platform strictly enforces a **4-stage linear workflow**. No intermediate or
 
 ---
 
-## 7. Motion, 3D & Accessibility Rules
+## 7. Strict Anti-Vibe-Coding Prohibitions (Zero Aesthetic Gimmicks)
 
-1. **Accessibility First (`prefers-reduced-motion`):**
-   - When a user has reduced motion enabled in their operating system, all 3D tilt effects, smooth parallax, and animated entrance transitions must be completely disabled.
-2. **Subtle & Restrained Motion:**
-   - Micro-interactions must not exceed `200ms`–`400ms`.
-   - Avoid aggressive page shakes, disorienting 3D camera sweeps, or animations that block user interaction.
-3. **Hardware Fallback:**
-   - Any WebGL or Three.js element must feature an automatic 2D fallback for devices with disabled or low-power GPUs.
+1. **NEVER Use Purple Gradients:**
+   - Zero purple, violet, indigo, or magenta gradients in any stylesheet, button, card, or modal.
+   - Use warm, grounded tones (off-white, deep navy `#07111f`, slate, warm amber `#F0640D`, terracotta, or emerald).
+2. **NEVER Use Pill-Shaped Buttons:**
+   - Zero `border-radius: 9999px` or pill-shaped buttons.
+   - All buttons must use human-designed, crisp rectangular corners with subtle `6px` to `8px` radii.
+3. **NO Fake Reviews, Fake Ratings, or Fake Metrics:**
+   - Zero fabricated 5-star testimonials ("John Doe said...", fake Google star ratings).
+   - Zero fabricated awards (no fake AWWARDS, FWA, or Webby badges).
+   - Only state verifiable, honest build standards and capabilities.
+4. **NO Vague Hero Copy:**
+   - Zero generic AI buzzwords ("Transform your digital frontier", "Next-gen synergy", "Visualise your mind in motion").
+   - Headlines must be specific, direct, plain-spoken Indian local business copy:
+     *"Websites for local businesses in India that bring phone calls and WhatsApp orders. Delivered in 2 to 5 days."*
+5. **NO Emoji Icons:**
+   - Zero emojis in headings, cards, navigation, or buttons. Use crisp vector SVGs or Lucide icons only.
+6. **NO Em Dashes (`—`):**
+   - Use standard hyphens `-` or colons `:` instead of pretentious em dashes.
+7. **NO Over-The-Top Scroll Animations or Cursor Animations:**
+   - Zero custom cursor followers or trailing dots.
+   - Zero page-shaking effects, dizzying 3D camera sweeps, or scroll-blocking animations.
+8. **NO AI Slop Photos or AI Slop Copy:**
+   - Zero plastic-looking AI-generated faces or unrealistic mockups.
+   - Use realistic Indian local business archetypes (Kirana, Medical Stores, Unisex Salons, Cafés).
+9. **NO Fake Custom Counters:**
+   - Zero fake animated tickers claiming fake numbers ("500+ clients", "$1M generated").
+   - Counters in the owner dashboard reflect only real, live database submissions.
 
 ---
 
-## 8. Brand & Content Integrity
+## 8. Production Launch Gate Invariants
 
-1. **Authentic Representation:** Avoid generic marketing buzzwords or unrealistic promises (e.g., *"guaranteed 10x revenue in 24 hours"*).
-2. **Local Business Relevance:** Use realistic Indian business archetypes (Kirana, Medical Stores, Unisex Salons, Cafés) in all demos and copy.
-3. **Founder Attribution:** The portfolio and direct contact channels represent **Darshan / ApnaWeb Studio** with verified social connections ([@darshan_auradi_06](https://www.instagram.com/darshan_auradi_06/)).
+The platform **MUST NOT LAUNCH** to production until all three conditions are satisfied:
+1. **Custom Domain Connected:** Production DNS must be routed to a verified custom domain (e.g. `apnaweb.in`).
+2. **Official Favicon Active:** Crisp SVG / ICO favicon (`favicon.svg`) linked and rendering on all pages.
+3. **Zero AI / Template Tags:** All "Made with AI", 21st.dev, v0, or external template references completely eradicated from copy, code comments, and metadata.
 
 ---
 
@@ -105,3 +126,4 @@ The platform strictly enforces a **4-stage linear workflow**. No intermediate or
 1. **Maintain Documentation Integrity:** When technical implementations change, update the 6 core architectural documents (`PRD.md`, `ARCHITECTURE.md`, `RULES.md`, `DESIGN.md`, `TASKS.md`, `MEMORY.md`) simultaneously.
 2. **Atomic Git Commits:** Write clean, conventional commit messages (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`).
 3. **Preserve Working Routes:** Never deprecate or break active routes without an explicit migration path.
+4. **Make NO MISTAKES:** Triple-check every change against these governance invariants before shipping.
