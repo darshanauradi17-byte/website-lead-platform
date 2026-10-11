@@ -2,11 +2,13 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
+const { execSync } = require("child_process");
 require("dotenv").config();
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+// STRICTLY ENFORCE PORT 3000 PERMANENTLY
+const PORT = 3000;
 
 const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = path.join(__dirname, "data");
@@ -587,21 +589,49 @@ app.use((req, res) => {
 
 
 // =====================================================
-// START SERVER
+// AUTOMATIC PORT 3000 ENFORCEMENT & CONFLICT RESOLUTION
 // =====================================================
 
-app.listen(PORT, () => {
+function freePort(targetPort) {
+  try {
+    if (process.platform === "win32") {
+      const psCmd = `powershell -NoProfile -Command "Get-NetTCPConnection -LocalPort ${targetPort} -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }"`;
+      execSync(psCmd, { stdio: "ignore" });
+    } else {
+      execSync(`lsof -ti:${targetPort} | xargs kill -9 2>/dev/null || true`, { stdio: "ignore" });
+    }
+  } catch (e) {
+    // Port wasn't locked or already freed
+  }
+}
 
-  console.log("");
-  console.log("====================================");
-  console.log("      ApnaWeb Server Running");
-  console.log("====================================");
-  console.log("");
-  console.log(`Customer Website: http://localhost:${PORT}/`);
-  console.log(`Portfolio:        http://localhost:${PORT}/portfolio.html`);
-  console.log(`Owner Dashboard:  http://localhost:${PORT}/dashboard.html`);
-  console.log("");
-  console.log("====================================");
-  console.log("");
+function startServer(canRetry = true) {
+  const server = app.listen(PORT, () => {
+    console.log("");
+    console.log("====================================");
+    console.log("      ApnaWeb Server Running");
+    console.log("====================================");
+    console.log("");
+    console.log(`Customer Website: http://localhost:${PORT}/`);
+    console.log(`Portfolio:        http://localhost:${PORT}/portfolio.html`);
+    console.log(`Owner Dashboard:  http://localhost:${PORT}/dashboard.html`);
+    console.log("");
+    console.log("====================================");
+    console.log("");
+  });
 
-});
+  server.on("error", (err) => {
+    if (err.code === "EADDRINUSE" && canRetry) {
+      console.warn(`\n[Notice] Port ${PORT} was occupied by an earlier process.`);
+      console.warn(`[Action] Automatically freeing port ${PORT} to lock http://localhost:3000 permanently...\n`);
+      freePort(PORT);
+      setTimeout(() => {
+        startServer(false);
+      }, 800);
+    } else {
+      console.error(`\n[Server Error on Port ${PORT}]:`, err.message);
+    }
+  });
+}
+
+startServer();
